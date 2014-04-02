@@ -291,11 +291,13 @@ public class Monde
 			{
 				parcours = new Position2D(i, j);
 				
-				if ( this.estDansMonde(parcours) /*&& Math.floor(pos.getDistanceTo(parcours)+ Global.TORCHE_SEUIL) < rayon */
+				if ( this.estDansMonde(parcours) 
+				&& Math.floor(pos.getDistanceTo(parcours)+ Global.TORCHE_SEUIL) < rayon 
+				&& !(murEntre(m_joueur.getPosition(),parcours) || murEntre(m_joueur.getPosition(),parcours))
 				)
 				{
 					this.getCase(parcours).setVisible(true);
-					if(murEntre(m_joueur.getPosition(),parcours))this.getCase(parcours).setVisible(false);
+					
 				}
 				
 	
@@ -303,15 +305,22 @@ public class Monde
 		}
 	}
 
+	
+	
 	public boolean murEntre(Position2D A,Position2D B)
 	{
 		Vector<Position2D> vec=Position2D.positionEntre(A,B);
+		
 		int i=0;
 		boolean existeMur=false;
 		
 		while(i<vec.size() && !existeMur)
 		{
-			if(getCase(vec.get(i)).getId()=='M') existeMur=true;
+			if(getCase(vec.get(i)).getId()=='M')
+			{
+				existeMur=true;
+			}
+			
 			i++;
 		}
 		

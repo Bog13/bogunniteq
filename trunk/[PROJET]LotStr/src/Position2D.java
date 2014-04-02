@@ -110,7 +110,10 @@ public class Position2D
 		
 		Vector<Position2D> res = new Vector<Position2D>();
 		Position2D pos=new Position2D(0,0);
-		
+		if(pos1.estPlusGrand(pos2))
+		{
+			Position2D.swap(pos1,pos2);
+		}
 		double a= (double)(pos2.m_l-pos1.m_l )/(double)( pos2.m_c-pos1.m_c);
 	
 		double b= pos1.m_l - a*pos1.m_c;
@@ -128,6 +131,13 @@ public class Position2D
 	public boolean estPlusGrand(Position2D target)
 	{
 		return this.getDistanceTo(Position2D.ORIGINE) > target.getDistanceTo(Position2D.ORIGINE);
+	}
+	
+	public static void swap(Position2D pos1,Position2D pos2)
+	{
+		Position2D tmp=pos1.clone();
+		pos1=pos2.clone();
+		pos2=tmp.clone();
 	}
 
 	/**
