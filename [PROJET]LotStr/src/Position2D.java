@@ -24,10 +24,10 @@ public class Position2D
 
 	}
 
-	public Position2D(int x, int y)
+	public Position2D(int c, int l)
 	{
-		m_c = x;
-		m_l = y;
+		m_c = c;
+		m_l = l;
 	}
 	
 	public static Position2D position(int i,int j)
@@ -107,6 +107,7 @@ public class Position2D
 	/*Algorithme de tracé de segment de Bresenham*/
 	public static Vector<Position2D> positionEntre( Position2D pos1, Position2D pos2 )
 	{
+		
 		Vector<Position2D> res = new Vector<Position2D>();
 		Position2D pos=new Position2D(0,0);
 		
@@ -114,14 +115,19 @@ public class Position2D
 	
 		double b= pos1.m_l - a*pos1.m_c;
 		
-		for(pos.m_c=pos1.m_c;pos.m_c<=pos2.m_c;pos.m_c++)
+		for(pos.m_c=pos1.m_c;pos.m_c<=pos2.m_c-1;pos.m_c++)
 		{
 			
-			pos.m_l=(int)(a*pos.m_c + b);
-			res.add(new Position2D(pos.m_l,pos.m_c));
+			pos.m_l=(int)(a*pos.m_c + b );
+			res.add(new Position2D(pos.m_c,pos.m_l));
 		}
 	
 		return res;
+	}
+	
+	public boolean estPlusGrand(Position2D target)
+	{
+		return this.getDistanceTo(Position2D.ORIGINE) > target.getDistanceTo(Position2D.ORIGINE);
 	}
 
 	/**
