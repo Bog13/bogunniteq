@@ -1,0 +1,21 @@
+#summary Présentation de LOTStr
+
+= Introduction =
+
+Lord of the Strings est un projet de jeu du type "rogue like" développé dans le cadre du projet de premier semestre d'informatique. Ici sera regroupé les objectifs et mécanisme du jeu.
+
+
+= Details =
+
+Un *Rogue Like* est un jeu du type porte-monstre-trésor (PMT): 
+_"l’action se résume schématiquement à ouvrir une porte, combattre un monstre qui se trouve derrière et découvrir un trésor détenu ou protégé par le monstre." (wikipedia)_
+Le joueur se retrouve donc dans un dongeon *inconnu* et *inexploré* dans lequel il devra combattre des monstres, explorer des salles, mais par dessus tout *trouver l'anneau*, accomplissement final et trésors ultime de sa quête.
+
+== Portes ==
+Les portes cachent le contenu des salles dans lesquelles se trouvent monstres et trésors.
+
+== Monstres ==
+Les monstres, créatures érrante depuis des années, des decennies, voir des millénaires dans les salles lugubres du dongeon, sont là pour nous rappeler qu'il n'est jamais bon de rester aussi longtemps sans soleil.
+
+== Trésor ==
+Des pièces, des montagnes de pièces, des chaines en or, des chaines de montagne de chaines en or ! Et surtout, surtout, un anneau sur lequel sont inscrit des étranges symboles indéchiffrables...
