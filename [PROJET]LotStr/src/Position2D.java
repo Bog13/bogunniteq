@@ -162,4 +162,20 @@ public class Position2D
 		return (float) Math.sqrt(Math.pow(m_c - cible.m_c, 2)
 				+ Math.pow(m_l - cible.m_l, 2));
 	}
+	
+	public Vector<Position2D> getVoisin()
+	{
+		Vector<Position2D> voisin= new Vector<Position2D>();
+		Position2D haut=new Position2D(m_c-1,m_l);
+		Position2D bas=new Position2D(m_c+1,m_l);
+		Position2D gauche=new Position2D(m_c,m_l-1);
+		Position2D droite=new Position2D(m_c,m_l+1);
+		
+		voisin.add(haut);
+		voisin.add(bas);
+		voisin.add(gauche);
+		voisin.add(droite);
+	
+		return voisin;
+	}
 }

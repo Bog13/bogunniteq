@@ -29,13 +29,13 @@ public class Jeu
 			
 			numJoueur=m_tour% m_monde.getNbPerso();
 			
-			
+			///UPDATE
+			this.update();
 			
 			///AFFICHAGE
 			this.afficher();
 			
-			///UPDATE
-			this.update();
+			
 			
 			///JOUEURS
 			System.out.println("TOUR "+m_tour+": "+ m_monde.getPerso(numJoueur).getNom() )  ;

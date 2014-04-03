@@ -6,6 +6,7 @@
 public class Case
 {
 	protected char m_id;
+	protected char m_look;
 	protected Position2D m_position;
 	protected Item m_item;
 	protected boolean m_estVisible;
@@ -15,8 +16,23 @@ public class Case
 	
 	public Case(char id)
 	{
+		Init(id);
+		this.initPropriete();
+
+	}
+	
+	public void Init(char id)
+	{
 		m_id=id;
+		m_look='@';
 		m_position= new Position2D();
+	}
+	
+	public Case(char id,char look)
+	{
+		
+		Init(id);
+		m_look=look;
 		this.initPropriete();
 
 	}
@@ -37,16 +53,25 @@ public class Case
 			case '0':///SOL
 				m_estObstacle=false;
 				m_estLumineux=false;
+				m_look=' ';
 				break;
 				
 			case 'M':///MUR
 				m_estObstacle=true;
 				m_estLumineux=false;
+				m_look='X';
 				break;
 				
 			case 'T':///TORCHE
 				m_estObstacle=false;
 				m_estLumineux=false;//mais peut être activée !
+				m_look='t';
+				break;
+			
+			case 'P':///PORTE
+				m_estObstacle=false;
+				m_estLumineux=false;
+				m_look='_';
 				break;
 			
 		}
@@ -90,5 +115,7 @@ public class Case
 	}
 	
 	public void setId(char id) {m_id=id;}
+	public void setLook(char look) {m_look=look;}
+	public char getLook() {return m_look;}
 	
 }
