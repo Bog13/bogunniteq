@@ -38,6 +38,9 @@ public class Torche extends Activable
 	{
 		if(m_timer>-1)m_timer--;
 		else{ desactiver(); }
+		
+		if(m_on)m_look='T';
+		else m_look='t';
 	}
 
 }

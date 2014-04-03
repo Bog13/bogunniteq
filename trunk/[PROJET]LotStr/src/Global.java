@@ -19,7 +19,7 @@ public class Global
 	final public static int NB_CASE_HAUTEUR=30;//30
 	
 	final public static Ecran.Fenetre FENETRE = new Ecran.Fenetre(new Ecran.MenuPanel());
-	final public static int TORCHE_RAYON=7;
+	final public static int TORCHE_RAYON=4;
 	final public static int TORCHE_DUREE=10;
 	final public static int JOUEUR_RAYON=3;
 	final public static float TORCHE_SEUIL=0.7f;

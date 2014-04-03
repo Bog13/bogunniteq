@@ -29,6 +29,7 @@ public class Monde
 
 		initMonde();
 		this.initPositionLumineux();
+		initMur();
 
 	}
 
@@ -45,7 +46,7 @@ public class Monde
 	// /////////////////////////////////
 	// /********** INIT **********///
 	// ////////////////////////////////
-
+	
 	/**
 	 * Initialise le monde dans un etat de base;
 	 */
@@ -59,12 +60,62 @@ public class Monde
 				m_monde[i][j] = new Case('0');
 			}
 		}
+		
+		
 
+	}
+	
+	public void Init()
+	{
+		this.initPositionLumineux();
+		initMur();
+	}
+	
+	public void initMur()
+	{
+		Position2D parcours=null;
+		Case pcase=null;
+		
+		for ( int i = 0; i < Global.NB_CASE_HAUTEUR; i++ )
+		{
+			for ( int j = 0; j < Global.NB_CASE_LARGEUR; j++ )
+			{
+				parcours = new Position2D(i, j);
+				pcase=getCase(parcours);
+				
+				if(pcase.getId()=='M')
+				{
+					switch( nbVoisin(parcours,'M') )
+					{
+						case 0:
+							pcase.setLook('0');
+							break;
+						case 1:
+							pcase.setLook('+');
+							break;
+						case 2:
+							pcase.setLook('+');
+							break;
+						case 3:
+							pcase.setLook('-');
+							break;
+						case 4:
+							pcase.setLook('.');
+							break;
+						default:
+							pcase.setLook('X');
+							break;
+					}
+				}
+				
+			}
+		}
+		
 	}
 
 	public void initPositionLumineux()
 	{
-		Position2D parcours;
+		Position2D parcours=null;
 		for ( int i = 0; i < Global.NB_CASE_HAUTEUR; i++ )
 		{
 			for ( int j = 0; j < Global.NB_CASE_LARGEUR; j++ )
@@ -82,6 +133,47 @@ public class Monde
 	// /////////////////////////////////
 	// /********** OUTILS **********///
 	// ////////////////////////////////
+	
+	/**
+	 * Nombre de voisin d'une position quelconque
+	 * @param pos
+	 * @return
+	 */
+	public int nbVoisin(Position2D pos)
+	{
+		int nb=0;
+		Vector<Position2D> voisin=pos.getVoisin();
+		
+		for(int i=0;i<voisin.size();i++)
+		{
+			if( estDansMonde(voisin.get(i)) )
+			{
+				nb++;
+			}
+		}
+		return nb;
+	}
+	
+	/**
+	 * Nombre de case d'id type autour de pos
+	 * @param pos
+	 * @return
+	 */
+	public int nbVoisin(Position2D pos,char type)
+	{
+		int nb=0;
+		Vector<Position2D> voisin=pos.getVoisin();
+		
+		for(int i=0;i<voisin.size();i++)
+		{
+			if( estDansMonde(voisin.get(i)) && getCase(voisin.get(i)).getId()==type )
+			{
+				nb++;
+			}
+		}
+		return nb;
+	}
+	
 	/**
 	 * Indique si il existe un perso qui est aux coordonées pos 
 	 * @param pos
@@ -235,7 +327,7 @@ public class Monde
 			}
 		}
 
-		this.initPositionLumineux();
+		Init();
 	}
 
 	// /////////////////////////////////
@@ -251,6 +343,8 @@ public class Monde
 		updateTorche();
 		updateLumiere();
 	}
+	
+	
 
 	// /////////////////////////////////
 	// /********** UPDATE **********///
@@ -296,7 +390,7 @@ public class Monde
 				
 				)
 				{
-					estVisible=!(murEntre(pos,parcours) || murEntre(pos,m_joueur.getPosition()));
+					estVisible=!(murEntre(pos,parcours) || murEntre(parcours,pos));
 					
 					this.getCase(parcours).setVisible(estVisible);
 					
@@ -358,6 +452,7 @@ public class Monde
 			for ( int j = 0; j < Global.NB_CASE_LARGEUR; j++ )
 			{
 				this.getCase(new Position2D(i, j)).setVisible(false);
+				
 			}
 		}
 	}
@@ -377,33 +472,8 @@ public class Monde
 		{
 			for ( int j = 0; j < Global.NB_CASE_LARGEUR; j++ )
 			{
-				// MONDE CASES
-				switch ( m_monde[i][j].getId() )
-				{
-				case '0':// sol
-					rendu = ' ';
-					break;
-
-				case 'M':// mur
-					rendu = 'X';
-					break;
-
-				case 'P':// porte
-					rendu = '_';
-					break;
-
-				case 'T':// torche
-					if ( ((Activable) m_monde[i][j]).estActif() ) rendu = 'T';
-					else rendu = 't';
-					break;
-
-				default:
-					rendu = '@';
-					break;
-				}
-			
 				
-				
+				rendu= getCase(Position2D.position(i,j)).getLook();
 				
 				if ( existePersoPosition(new Position2D(i, j)) )
 				{
@@ -420,7 +490,8 @@ public class Monde
 					}
 					else
 					{
-						System.out.print('?');
+						System.out.print(rendu);
+						//System.out.print('*');
 					}
 
 				}
