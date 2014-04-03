@@ -110,15 +110,15 @@ public class Position2D
 		
 		Vector<Position2D> res = new Vector<Position2D>();
 		Position2D pos=new Position2D(0,0);
-		if(pos1.estPlusGrand(pos2))
+		/*if(pos1.estPlusGrand(pos2))
 		{
-			Position2D.swap(pos1,pos2);
-		}
+			Position2D.swap(pos1,pos2); //UTILE ?
+		}*/
 		double a= (double)(pos2.m_l-pos1.m_l )/(double)( pos2.m_c-pos1.m_c);
 	
 		double b= pos1.m_l - a*pos1.m_c;
 		
-		for(pos.m_c=pos1.m_c;pos.m_c<=pos2.m_c-1;pos.m_c++)
+		for(pos.m_c=pos1.m_c+1;pos.m_c<=pos2.m_c-1;pos.m_c++)
 		{
 			
 			pos.m_l=(int)(a*pos.m_c + b );

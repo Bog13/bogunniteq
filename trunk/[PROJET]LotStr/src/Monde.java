@@ -284,7 +284,7 @@ public class Monde
 	public void setCaseVisibleAutour( Position2D pos, int rayon )
 	{
 		Position2D parcours;
-	
+		boolean estVisible=true;
 		for ( int i = pos.getC() - rayon; i < pos.getC() + rayon + 1; i++ )
 		{
 			for ( int j = pos.getL() - rayon; j < pos.getL() + rayon + 1; j++ )
@@ -293,10 +293,12 @@ public class Monde
 				
 				if ( this.estDansMonde(parcours) 
 				&& Math.floor(pos.getDistanceTo(parcours)+ Global.TORCHE_SEUIL) < rayon 
-				&& !(murEntre(m_joueur.getPosition(),parcours) || murEntre(m_joueur.getPosition(),parcours))
+				
 				)
 				{
-					this.getCase(parcours).setVisible(true);
+					estVisible=!(murEntre(pos,parcours) || murEntre(pos,m_joueur.getPosition()));
+					
+					this.getCase(parcours).setVisible(estVisible);
 					
 				}
 				
