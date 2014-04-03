@@ -17,7 +17,7 @@ public class Case
 	public Case(char id)
 	{
 		Init(id);
-		this.initPropriete();
+		this.initPropriete(id);
 
 	}
 	
@@ -33,7 +33,7 @@ public class Case
 		
 		Init(id);
 		m_look=look;
-		this.initPropriete();
+		this.initPropriete(id);
 
 	}
 	
@@ -45,10 +45,18 @@ public class Case
 		System.out.print(m_id);
 	}
 	
-	public void initPropriete()
+	public void convert(char id)
+	{
+		//m_id=id;
+		m_look='.';
+		this.initPropriete(id);
+		//m_id='0';
+	}
+	
+	public void initPropriete(int id)
 	{
 		m_estVisible=false;
-		switch(m_id)
+		switch(id)
 		{
 			case '0':///SOL
 				m_estObstacle=false;
@@ -72,6 +80,11 @@ public class Case
 				m_estObstacle=false;
 				m_estLumineux=false;
 				m_look='_';
+				break;
+			default:
+				m_estObstacle=false;
+				m_estLumineux=false;
+				m_look='@';
 				break;
 			
 		}
@@ -117,5 +130,11 @@ public class Case
 	public void setId(char id) {m_id=id;}
 	public void setLook(char look) {m_look=look;}
 	public char getLook() {return m_look;}
+
+	public void setObstacle( boolean b )
+	{
+		m_estObstacle=b;
+		
+	}
 	
 }
