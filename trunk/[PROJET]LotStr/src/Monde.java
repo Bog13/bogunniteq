@@ -71,6 +71,21 @@ public class Monde
 		initMur();
 	}
 	
+	public boolean estVoisinEgal (Position2D parcours,int i,char c)
+	{
+		return estDansMonde(parcours.getVoisin().get(i)) && getCase(parcours.getVoisin().get(i)).getId()==c;
+	}
+	
+	public boolean estVoisinMP(Position2D pos, int i)
+	{
+		return estVoisinEgal(pos,i,'P') || estVoisinEgal(pos,i,'M');
+	}
+	
+	public int nbVoisinMP(Position2D pos)
+	{
+		return nbVoisin(pos,'M')+nbVoisin(pos,'P');
+	}
+	
 	public void initMur()
 	{
 		Position2D parcours=null;
@@ -85,22 +100,50 @@ public class Monde
 				
 				if(pcase.getId()=='M')
 				{
-					switch( nbVoisin(parcours,'M') )
+					switch( nbVoisinMP(parcours) )
 					{
-						case 0:
-							pcase.setLook('0');
+						case 0://bloc seul
+							pcase.setLook('X');
 							break;
-						case 1:
+							
+						case 1://extremite
+							
+							if( estVoisinMP(parcours,1) )
+							{
+								pcase.setLook('#');//haut
+							}
+							else if( estVoisinMP(parcours,0) )
+							{
+								pcase.setLook('#');//bas
+							}
+							else if( estVoisinMP(parcours,3) )
+							{
+								pcase.setLook('[');//gauche
+							}
+							else if( estVoisinMP(parcours,2))
+							{
+								pcase.setLook(']');//droite
+							}
+							else pcase.setLook('e');
+							
+							break;
+							
+						case 2://coin
 							pcase.setLook('+');
 							break;
-						case 2:
-							pcase.setLook('+');
+							
+						case 3://face
+							if( estVoisinMP(parcours,0) && estVoisinMP(parcours,1))
+							{
+								pcase.setLook('|');//horizontale
+							}
+							else pcase.setLook('-');//verticale
+							
 							break;
-						case 3:
-							pcase.setLook('-');
-							break;
-						case 4:
-							pcase.setLook('.');
+							
+						case 4://interieur
+							//pcase.setLook(' ');
+							pcase.convert('0');
 							break;
 						default:
 							pcase.setLook('X');
