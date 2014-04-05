@@ -159,8 +159,9 @@ public class Position2D
 
 	public float getDistanceTo( Position2D cible )
 	{
-		return (float) Math.sqrt(Math.pow(m_c - cible.m_c, 2)
-				+ Math.pow(m_l - cible.m_l, 2));
+		/*return (float) Math.sqrt(Math.pow(m_c - cible.m_c, 2)
+				+ Math.pow(m_l - cible.m_l, 2));*/
+		return Math.abs(cible.m_l - m_l)+2*Math.abs(cible.m_c-m_c);
 	}
 	
 	public Vector<Position2D> getVoisin()
