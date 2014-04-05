@@ -57,10 +57,10 @@ public class Monde
 		{
 			for ( int j = 0; j < Global.NB_CASE_LARGEUR; j++ )
 			{
+				//m_monde[i][j] = new Case('0',Position2D.position(i,j));
 				m_monde[i][j] = new Case('0');
 			}
 		}
-		
 		
 
 	}
@@ -103,26 +103,26 @@ public class Monde
 					switch( nbVoisinMP(parcours) )
 					{
 						case 0://bloc seul
-							pcase.setLook('X');
+							pcase.setLook('1');
 							break;
 							
 						case 1://extremite
 							
 							if( estVoisinMP(parcours,1) )
 							{
-								pcase.setLook('#');//haut
+								pcase.setLook('^');//haut
 							}
 							else if( estVoisinMP(parcours,0) )
 							{
-								pcase.setLook('#');//bas
+								pcase.setLook('v');//bas
 							}
 							else if( estVoisinMP(parcours,3) )
 							{
-								pcase.setLook('[');//gauche
+								pcase.setLook('<');//gauche
 							}
 							else if( estVoisinMP(parcours,2))
 							{
-								pcase.setLook(']');//droite
+								pcase.setLook('>');//droite
 							}
 							else pcase.setLook('e');
 							
@@ -135,15 +135,14 @@ public class Monde
 						case 3://face
 							if( estVoisinMP(parcours,0) && estVoisinMP(parcours,1))
 							{
-								pcase.setLook('|');//horizontale
+								pcase.setLook('|');//vertical
 							}
-							else pcase.setLook('-');//verticale
+							else pcase.setLook('-');//horizontal
 							
 							break;
 							
 						case 4://interieur
-							//pcase.setLook(' ');
-							pcase.convert('0');
+							pcase.change(new Case('0'));
 							break;
 						default:
 							pcase.setLook('X');
@@ -429,7 +428,8 @@ public class Monde
 				parcours = new Position2D(i, j);
 				
 				if ( this.estDansMonde(parcours) 
-				&& Math.floor(pos.getDistanceTo(parcours)+ Global.TORCHE_SEUIL) < rayon 
+				/*&& Math.floor(pos.getDistanceTo(parcours)+ Global.TORCHE_SEUIL) < rayon */
+				&& pos.getDistanceTo(parcours) <=rayon
 				
 				)
 				{
@@ -511,30 +511,32 @@ public class Monde
 	public void afficher()
 	{
 		char rendu;
+		Position2D parcours=null;
 		for ( int i = 0; i < Global.NB_CASE_HAUTEUR; i++ )
 		{
 			for ( int j = 0; j < Global.NB_CASE_LARGEUR; j++ )
 			{
 				
 				rendu= getCase(Position2D.position(i,j)).getLook();
+				parcours=new Position2D(i,j);
 				
-				if ( existePersoPosition(new Position2D(i, j)) )
+				if ( existePersoPosition(parcours) )
 				{
-					getPersoPosition(new Position2D(i, j)).afficher();
+					getPersoPosition(parcours).afficher();
 				}
 				else
 				{
 
 					this.updateVisibleAutour();
-					if ( this.getCase(new Position2D(i, j)).estVisible() )
+					if ( this.getCase(parcours).estVisible() )
 					{
 						System.out.print(rendu);
 
 					}
 					else
 					{
-						System.out.print(rendu);
-						//System.out.print('*');
+						//System.out.print(rendu);
+						System.out.print('"');
 					}
 
 				}
@@ -549,5 +551,6 @@ public class Monde
 		
 
 	}
-
+	
+	//System.out.println('a');
 }

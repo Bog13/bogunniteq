@@ -42,15 +42,14 @@ public class Case
 	 */
 	public void afficher()
 	{
-		System.out.print(m_id);
+		System.out.print(m_look);
 	}
 	
-	public void convert(char id)
+	public void change(Case c)
 	{
-		//m_id=id;
-		m_look='.';
-		this.initPropriete(id);
-		//m_id='0';
+		
+		m_look=c.getLook();
+		this.initPropriete(c.getId());
 	}
 	
 	public void initPropriete(int id)
@@ -79,7 +78,7 @@ public class Case
 			case 'P':///PORTE
 				m_estObstacle=false;
 				m_estLumineux=false;
-				m_look='_';
+				m_look='P';
 				break;
 			default:
 				m_estObstacle=false;
@@ -136,5 +135,7 @@ public class Case
 		m_estObstacle=b;
 		
 	}
+
+	
 	
 }
