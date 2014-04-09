@@ -449,20 +449,36 @@ public class Monde
 	public boolean murEntre(Position2D A,Position2D B)
 	{
 		Vector<Position2D> vec=Position2D.positionEntre(A,B);
-		
-		int i=0;
 		boolean existeMur=false;
 		
-		while(i<vec.size() && !existeMur)
+		if(A.getC()==B.getC())
 		{
-			if(getCase(vec.get(i)).getId()=='M')
+			if(A.getL()>B.getL())Position2D.swap(A,B);
+			int i=A.getL();
+			while(!existeMur && i<B.getL())
 			{
-				existeMur=true;
+				if(getCase(Position2D.position(i+1,A.getC())).getId()=='M') existeMur=true;
+				i++;
 			}
 			
-			i++;
 		}
 		
+		else
+		{
+			int i=0;
+	
+			while(i<vec.size() && !existeMur)
+			{
+				if(getCase(vec.get(i)).getId()=='M')
+				{
+					existeMur=true;
+				}
+			
+				i++;
+			}
+		
+			
+		}
 		return existeMur;
 	}
 
@@ -536,7 +552,7 @@ public class Monde
 					else
 					{
 						//System.out.print(rendu);
-						System.out.print('"');
+						System.out.print(':');
 					}
 
 				}
