@@ -34,7 +34,12 @@ public class Joueur extends Perso
 	public boolean jouer()
 	{
 		Scanner sc=new Scanner(System.in);
-		String saisie=sc.next();
+		String saisie = new String();
+		do
+		{
+			saisie=sc.next();
+		}
+		while ( (saisie.compareTo("exit")!=0) && (saisie.compareTo("8")!=0) && (saisie.compareTo("5")!=0) && (saisie.compareTo("4")!=0) && (saisie.compareTo("6")!=0) );
 		
 		if(saisie.compareTo("exit")==0)return false;
 		if(saisie.compareTo("8")==0  ) {move(-1,0);}
