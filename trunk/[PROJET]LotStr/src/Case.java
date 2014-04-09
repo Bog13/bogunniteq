@@ -9,6 +9,7 @@ public class Case
 	protected char m_look;
 	protected Position2D m_position;
 	protected Item m_item;
+	protected boolean m_hasItem;
 	protected boolean m_estVisible;
 	protected boolean m_estObstacle;
 	protected boolean m_estLumineux;
@@ -23,6 +24,8 @@ public class Case
 	
 	public void Init(char id)
 	{
+		m_hasItem=false;
+		m_item=null;
 		m_id=id;
 		m_look='@';
 		m_position= new Position2D();
@@ -43,6 +46,12 @@ public class Case
 	public void afficher()
 	{
 		System.out.print(m_look);
+	}
+	
+	public char rendu()
+	{	
+		if(m_hasItem) return m_item.rendu();
+		else return m_look;
 	}
 	
 	public void change(Case c)
@@ -135,7 +144,23 @@ public class Case
 		m_estObstacle=b;
 		
 	}
+	
+	public boolean hasItem() {return m_hasItem;}
+	
+	public void retirerItem()
+	{
+		m_hasItem=false;
+		m_item=null;
 
+	}
+	
+	public void mettreItem(Item it)
+	{
+		m_hasItem=true;
+		m_item=it;
+	}
+	
+	public Item getItem() {return m_item;}
 	
 	
 }
