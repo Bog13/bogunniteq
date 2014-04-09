@@ -57,10 +57,10 @@ public class Monde
 		{
 			for ( int j = 0; j < Global.NB_CASE_LARGEUR; j++ )
 			{
-				//m_monde[i][j] = new Case('0',Position2D.position(i,j));
 				m_monde[i][j] = new Case('0');
 			}
 		}
+		
 		
 
 	}
@@ -69,6 +69,8 @@ public class Monde
 	{
 		this.initPositionLumineux();
 		initMur();
+		
+		getCase(Position2D.position(2,2)).mettreItem( new PieceOr('$') ); ////DEBUG////
 	}
 	
 	public boolean estVoisinEgal (Position2D parcours,int i,char c)
@@ -450,35 +452,20 @@ public class Monde
 	{
 		Vector<Position2D> vec=Position2D.positionEntre(A,B);
 		boolean existeMur=false;
-		
-		if(A.getC()==B.getC())
-		{
-			if(A.getL()>B.getL())Position2D.swap(A,B);
-			int i=A.getL();
-			while(!existeMur && i<B.getL())
-			{
-				if(getCase(Position2D.position(i+1,A.getC())).getId()=='M') existeMur=true;
-				i++;
-			}
-			
-		}
-		
-		else
-		{
-			int i=0;
 	
-			while(i<vec.size() && !existeMur)
+		int i=0;
+	
+		while(i<vec.size() && !existeMur)
+		{
+			if(getCase(vec.get(i)).getId()=='M')
 			{
-				if(getCase(vec.get(i)).getId()=='M')
-				{
-					existeMur=true;
-				}
-			
-				i++;
+				existeMur=true;
 			}
-		
 			
+			i++;
 		}
+		
+
 		return existeMur;
 	}
 
@@ -526,14 +513,17 @@ public class Monde
 
 	public void afficher()
 	{
+		
 		char rendu;
 		Position2D parcours=null;
+		
+		m_joueur.afficheHud();
 		for ( int i = 0; i < Global.NB_CASE_HAUTEUR; i++ )
 		{
 			for ( int j = 0; j < Global.NB_CASE_LARGEUR; j++ )
 			{
 				
-				rendu= getCase(Position2D.position(i,j)).getLook();
+				rendu= getCase(Position2D.position(i,j)).rendu();
 				parcours=new Position2D(i,j);
 				
 				if ( existePersoPosition(parcours) )
@@ -551,8 +541,8 @@ public class Monde
 					}
 					else
 					{
-						//System.out.print(rendu);
-						System.out.print(':');
+						System.out.print(rendu);
+						//System.out.print(':');
 					}
 
 				}

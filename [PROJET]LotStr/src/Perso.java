@@ -9,6 +9,7 @@ public abstract class Perso
 	protected char m_rendu;
 	protected Monde m_monde;
 	
+	
 	public int getVie()
 	{
 		return m_vie;
