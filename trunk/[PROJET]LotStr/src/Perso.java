@@ -1,10 +1,33 @@
 public abstract class Perso
 {
-	protected float m_vie;
+	protected int m_vie;
+	protected int m_atk;
+	protected int m_def;
+	
 	protected String m_nom;
 	protected Position2D m_position;
 	protected char m_rendu;
 	protected Monde m_monde;
+	
+	public int getVie()
+	{
+		return m_vie;
+	}
+	
+	public void setVie(int modif)
+	{
+		m_vie = (m_vie + modif);
+	}
+	
+	public int getAtk()
+	{
+		return m_atk;
+	}
+	
+	public int getDef()
+	{
+		return m_def;
+	}
 	
 	public void init(Monde monde)
 	{
@@ -12,7 +35,7 @@ public abstract class Perso
 		m_nom="";
 		m_position = new Position2D();
 		m_vie=100;
-		m_rendu='C';
+		m_rendu='A';
 	}
 	
 	public Perso(Monde monde)

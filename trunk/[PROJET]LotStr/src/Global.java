@@ -24,5 +24,10 @@ public class Global
 	final public static int JOUEUR_RAYON=6;
 	final public static float TORCHE_SEUIL=0.7f;
 	
+	final public static int VIE_JOUEUR = 10;
+	final public static String NOM_JOUEUR = "Frodet Saquon";
+	final public static int ATK_JOUEUR = 5;
+	final public static int DEF_JOUEUR = 2;
+
 	
 }
