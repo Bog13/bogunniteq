@@ -1,4 +1,4 @@
-#summary One-sentence summary of this page.
+Liste exaustive des objet du jeu.
 
 = Contenu de LotStr =
 
