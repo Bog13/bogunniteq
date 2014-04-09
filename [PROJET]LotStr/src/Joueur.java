@@ -76,11 +76,21 @@ public class Joueur extends Perso
 	{
 		Scanner sc=new Scanner(System.in);
 		String saisie = new String();
+
+		boolean saisieCorrect=false;
+		
 		do
 		{
 			saisie=sc.next();
+			
+			saisieCorrect=  (saisie.compareTo("p")==0) ||
+							(saisie.compareTo("8")==0) ||
+							(saisie.compareTo("5")==0) ||
+							(saisie.compareTo("4")==0) ||
+							(saisie.compareTo("6")==0) ||
+							(saisie.compareTo("exit")==0) ;
 		}
-		while ( (saisie.compareTo("exit")!=0) && (saisie.compareTo("8")!=0) && (saisie.compareTo("5")!=0) && (saisie.compareTo("4")!=0) && (saisie.compareTo("6")!=0) );
+		while (!saisieCorrect);
 		
 		if(saisie.compareTo("exit")==0)return false;
 		if(saisie.compareTo("8")==0  ) {move(-1,0);}
