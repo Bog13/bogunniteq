@@ -4,11 +4,11 @@ Liste exaustive des objet du jeu.
 =Activable=
 Objet fixe qui _s'active lorsque le joueur passe dessus_. Possède un timer permettant de définir le temps avant désactivation.
 
-==Torche==
+===Torche===
 Les torches sont des activables lumineux (ie: qui produise un halo de lumière, devoilant les cases dans leur rayon d'action). Les torches éclairent à trois cases de rayon et restent allumée 20 tours.
 
 =Item=
 Objet transportable _pouvant être ramasser_. Chaque Case peut contenir un item. Si tel est le cas le joueur peut ramasser cet item et le mettre dans son inventaire et l'utiliser ensuite.
 
-==Pièces d'or==
+===Pièces d'or===
 N'est pas visible dans l'inventaire car directement ajouter dans la reserve d'or du joueur.
