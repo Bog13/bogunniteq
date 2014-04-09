@@ -4,6 +4,11 @@ public class Joueur extends Perso
 	public Joueur(Monde monde)
 	{
 		super(monde);
+		m_vie = Global.VIE_JOUEUR ;
+		m_rendu='C';
+		m_nom = Global.NOM_JOUEUR;
+		m_atk = Global.ATK_JOUEUR;
+		m_def = Global.DEF_JOUEUR;
 	}
 	
 	public Joueur(Monde monde,Position2D pos)
