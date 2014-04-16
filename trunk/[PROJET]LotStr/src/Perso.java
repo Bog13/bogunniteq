@@ -73,8 +73,8 @@ public abstract class Perso
 	
 	public void move(int x,int y)
 	{
-		int newX=m_position.getC()+x;
-		int newY=m_position.getL()+y;
+		int newX=m_position.getL()+x;
+		int newY=m_position.getC()+y;
 		Position2D pos=new Position2D(newX,newY);
 		if(m_monde.estAccessible(pos))
 		{
