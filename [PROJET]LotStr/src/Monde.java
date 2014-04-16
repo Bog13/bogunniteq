@@ -71,6 +71,7 @@ public class Monde
 		initMur();
 		
 		getCase(Position2D.position(2,2)).mettreItem( new PieceOr('$') ); ////DEBUG////
+		getCase(Position2D.position(2,15)).mettreItem( new PieceOr('$') ); ////DEBUG////
 	}
 	
 	public boolean estVoisinEgal (Position2D parcours,int i,char c)
@@ -273,7 +274,7 @@ public class Monde
 	 */
 	public Case getCase( Position2D pos )
 	{
-		return m_monde[pos.getC()][pos.getL()];
+		return m_monde[pos.getL()][pos.getC()];
 	}
 
 	/**
@@ -293,8 +294,8 @@ public class Monde
 	 */
 	public boolean estDansMonde( Position2D pos )
 	{
-		return(pos.getC() >= 0 && pos.getC() < Global.NB_CASE_HAUTEUR
-				&& pos.getL() >= 0 && pos.getL() < Global.NB_CASE_LARGEUR);
+		return(pos.getL() >= 0 && pos.getL() < Global.NB_CASE_HAUTEUR
+				&& pos.getC() >= 0 && pos.getC() < Global.NB_CASE_LARGEUR);
 	}
 
 	/**
@@ -423,20 +424,18 @@ public class Monde
 	{
 		Position2D parcours;
 		boolean estVisible=true;
-		for ( int i = pos.getC() - rayon; i < pos.getC() + rayon + 1; i++ )
+		for ( int i = pos.getL() - rayon; i < pos.getL() + rayon + 1; i++ )
 		{
-			for ( int j = pos.getL() - rayon; j < pos.getL() + rayon + 1; j++ )
+			for ( int j = pos.getC() - rayon; j < pos.getC() + rayon + 1; j++ )
 			{
 				parcours = new Position2D(i, j);
 				
 				if ( this.estDansMonde(parcours) 
-				/*&& Math.floor(pos.getDistanceTo(parcours)+ Global.TORCHE_SEUIL) < rayon */
 				&& pos.getDistanceTo(parcours) <=rayon
 				
 				)
 				{
 					estVisible=!(murEntre(pos,parcours) || murEntre(parcours,pos));
-					
 					this.getCase(parcours).setVisible(estVisible);
 					
 				}
@@ -457,13 +456,15 @@ public class Monde
 	
 		while(i<vec.size() && !existeMur)
 		{
-			if(getCase(vec.get(i)).getId()=='M')
+			if(getCase(vec.get(i)).getId()=='M' || getCase(vec.get(i)).getId()=='P' )
 			{
 				existeMur=true;
 			}
 			
 			i++;
 		}
+		
+		
 		
 
 		return existeMur;

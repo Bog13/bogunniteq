@@ -18,10 +18,7 @@ public class Item
 		init(look);
 	}
 	
-	public void use()
-	{
-		
-	}
+	public void use() {};
 	
 	public void init(char look)
 	{

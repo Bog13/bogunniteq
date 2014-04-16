@@ -21,8 +21,7 @@ public class Global
 	final public static Ecran.Fenetre FENETRE = new Ecran.Fenetre(new Ecran.MenuPanel());
 	final public static int TORCHE_RAYON=8;
 	final public static int TORCHE_DUREE=20;
-	final public static int JOUEUR_RAYON=6;
-	final public static float TORCHE_SEUIL=0.7f;
+	final public static int JOUEUR_RAYON=10;
 	
 	final public static int VIE_JOUEUR = 10;
 	final public static String NOM_JOUEUR = "Frodet Saquon";
