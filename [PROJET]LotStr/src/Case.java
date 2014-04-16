@@ -147,6 +147,7 @@ public class Case
 	
 	public boolean hasItem() {return m_hasItem;}
 	
+	
 	public void retirerItem()
 	{
 		m_hasItem=false;

@@ -22,24 +22,28 @@ public class Jeu
 	
 	public void jouer()
 	{
-		int numJoueur=0;
+		int numPerso=0;
 		
 		while(m_alive==true)
 		{
 			
-			numJoueur=m_tour% m_monde.getNbPerso();
+			numPerso=m_tour% m_monde.getNbPerso();
 			
 			///UPDATE
 			this.update();
 			
 			///AFFICHAGE
-			this.afficher();
+			if (numPerso ==0)
+			{
+				this.afficher();
+				System.out.println("TOUR "+m_tour+": "+ m_monde.getPerso(numPerso).getNom() )  ;
+
+			}
 			
 			
 			
 			///JOUEURS
-			System.out.println("TOUR "+m_tour+": "+ m_monde.getPerso(numJoueur).getNom() )  ;
-			m_alive= m_monde.getPerso(numJoueur).jouer();
+			m_alive= m_monde.getPerso(numPerso).jouer();
 			
 			
 			
@@ -54,8 +58,7 @@ public class Jeu
 	
 	public void afficher()
 	{
-		if(Global.MODE_GRAPHIQUE)m_monde.afficher();
-		else m_monde.afficher();
+		m_monde.afficher();
 	}
 	
 	public void quitter()

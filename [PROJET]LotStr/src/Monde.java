@@ -68,7 +68,8 @@ public class Monde
 	{
 		for(int i=1;i<=Global.NB_PNJS;i++)
 		{
-			m_population.add(new Pnj(this, 1 , posHasard()));
+			// à modifier de sorte que différents types de monstres soient générés
+			m_population.add(new MonstreAgr(this,posHasard()));
 		}
 	}
 	
@@ -410,6 +411,7 @@ public class Monde
 		updateActivationTorche();
 		updateTorche();
 		updateLumiere();
+		updateCombat();
 	}
 	
 	
@@ -418,6 +420,12 @@ public class Monde
 	// /********** UPDATE **********///
 	// ////////////////////////////////
 	
+	public void updateCombat()
+	{
+		//if () 
+		
+	}
+
 	/**
 	 * Indique s'il y a une torche autour de pos dans un rayon donné.
 	 * @param pos
@@ -500,7 +508,6 @@ public class Monde
 		{
 			if ( this.existePersoPosition(m_positionLumineux.get(i)) )
 			{
-				System.out.println("OK");
 				((Torche) this.getCase(m_positionLumineux.get(i)))
 						.activer(Global.TORCHE_DUREE);
 			}
