@@ -11,6 +11,7 @@ public class Combat
 	
 	public Combat(Perso agresseur, Perso victime)
 	{
+		System.out.println("Un combat commence ! "+agresseur.getNom()+" attaque "+victime.getNom());
 		m_continuer = true;
 		
 		m_agresseur = agresseur;

@@ -26,6 +26,7 @@ public class LotStr
 		
 		Jeu jeu = new Jeu(monde);
 		jeu.jouer();
+		System.out.println("Exiting...");
 		
 		
 	

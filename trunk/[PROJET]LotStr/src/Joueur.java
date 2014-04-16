@@ -98,6 +98,9 @@ public class Joueur extends Perso
 		if(saisie.compareTo("4")==0 ) {move(0,-1);}
 		if(saisie.compareTo("6")==0 ) {move(0,1);}
 		if(saisie.compareTo("p")==0) {prendreItemCase();}
+		
+		
+		
 		return true;
 	}
 	
