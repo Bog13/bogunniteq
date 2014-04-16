@@ -27,6 +27,7 @@ public class Global
 	final public static String NOM_JOUEUR = "Frodet Saquon";
 	final public static int ATK_JOUEUR = 5;
 	final public static int DEF_JOUEUR = 2;
-
+	
+	final public static int NB_PNJS = 5;
 	
 }
