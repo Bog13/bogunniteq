@@ -61,8 +61,28 @@ public class Monde
 			}
 		}
 		
+	
+	}
+	
+	public void placerPnjs()
+	{
+		for(int i=1;i<=Global.NB_PNJS;i++)
+		{
+			m_population.add(new Pnj(this, 1 , posHasard()));
+		}
+	}
+	
+	public Position2D posHasard()
+	{
+		Position2D pos =null;
 		
-
+		do
+		{
+			pos = new Position2D((int)(Math.random()*Global.NB_CASE_HAUTEUR),(int)(Math.random()*Global.NB_CASE_LARGEUR));
+		}
+		while (getCase(pos).getId() != '0');
+		
+		return pos;
 	}
 	
 	public void Init()
@@ -71,7 +91,10 @@ public class Monde
 		initMur();
 		
 		getCase(Position2D.position(2,2)).mettreItem( new PieceOr('$') ); ////DEBUG////
+
+		placerPnjs();
 		getCase(Position2D.position(2,15)).mettreItem( new PieceOr('$') ); ////DEBUG////
+
 	}
 	
 	public boolean estVoisinEgal (Position2D parcours,int i,char c)
