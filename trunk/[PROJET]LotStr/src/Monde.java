@@ -463,10 +463,10 @@ public class Monde
 				
 				if ( this.estDansMonde(parcours) 
 				&& pos.getDistanceTo(parcours) <=rayon
-				
 				)
 				{
-					estVisible=!(murEntre(pos,parcours) || murEntre(parcours,pos));
+					//estVisible=!(murEntre(pos,parcours));
+					estVisible=true;
 					this.getCase(parcours).setVisible(estVisible);
 					
 				}
@@ -500,6 +500,13 @@ public class Monde
 
 		return existeMur;
 	}
+
+	
+		
+		
+		
+	
+	
 
 	public void updateActivationTorche()
 	{
@@ -561,6 +568,11 @@ public class Monde
 				{
 					getPersoPosition(parcours).afficher();
 				}
+				/*else if(parcours.estEntre(Position2D.position(0,0),Position2D.position(15,20)))
+				{
+					System.out.print('X');
+				}else System.out.print(' ');
+				*/
 				else
 				{
 
@@ -572,11 +584,12 @@ public class Monde
 					}
 					else
 					{
-						System.out.print(rendu);
-						//System.out.print(':');
+						//System.out.print(rendu);
+						System.out.print(':');
 					}
 
 				}
+				
 
 			}
 			System.out.print('\n');
