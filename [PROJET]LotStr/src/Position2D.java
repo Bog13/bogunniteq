@@ -104,28 +104,95 @@ public class Position2D
 		return existe;
 	}
 	
-	
+	/*Algorithme de bresenham
+	 * http://raphaello.univ-fcomte.fr/IG/Algorithme/Algorithmique.htm
+	 */
+	public static Vector<Position2D> bresenham(int xi,int yi,int xf,int yf) 
+	{
+		
+		Vector<Position2D> res = new Vector<Position2D>();
+		int dx,dy,i,xinc,yinc,cumul,x,y ;
+		x = xi ;
+		y = yi ;
+		dx = xf - xi ;
+		dy = yf - yi ;
+		xinc = ( dx > 0 ) ? 1 : -1 ;
+		yinc = ( dy > 0 ) ? 1 : -1 ;
+		dx = Math.abs(dx) ;
+		dy = Math.abs(dy) ;
+		 
+		 res.add(new Position2D(x,y)) ;
+		  
+		 if ( dx > dy )
+		 {
+			 cumul = dx / 2 ;
+			 
+		     for ( i = 1 ; i <= dx ; i++ )
+		     {
+		    	 x += xinc ;
+		    	 cumul += dy ;
+		      
+		    	 if ( cumul >= dx )
+		    	 {
+		    		 cumul -= dx ;
+		    		 y += yinc ;
+		    	 }
+		    	
+		    	 res.add(new Position2D(x,y)) ; 
+		     }
+		 }
+		 else
+		 {
+			 cumul = dy / 2 ;
+		     for ( i = 1 ; i <= dy ; i++ )
+		     {
+		    	 y += yinc ;
+		    	 cumul += dx ;
+		      
+		    	 if ( cumul >= dy )
+		    	 {
+		    		 cumul -= dy ;
+		    		 x += xinc ;
+		    	 }
+		    	 
+		    	 res.add(new Position2D(x,y));
+		     }
+		 }
+		    	 
+		  return res;
+	}
+		
 	
 	public static Vector<Position2D> positionEntre( Position2D pos1, Position2D pos2 )
+	{
+		return bresenham(pos1.m_c,pos1.m_l,pos2.m_c,pos2.m_l);
+	}
+	
+	/*public static Vector<Position2D> positionEntre( Position2D pos1, Position2D pos2 )
 	{
 		
 		Vector<Position2D> res = new Vector<Position2D>();
 		Position2D pos=new Position2D(0,0);
+		double a=0;
 		
-		double a= (double)(pos2.m_c-pos1.m_c )/(double)( pos2.m_l-pos1.m_l);
-			
-		double b= pos1.m_c - a*pos1.m_l;
-			
-		for(pos.m_l=pos1.m_l+1;pos.m_l<=pos2.m_l-1;pos.m_l++)
+		if(pos2.m_c != pos1.m_c)
+		{	
+			a= (double)(pos2.m_l-pos1.m_l)/(double)( pos2.m_c-pos1.m_c);
+		}
+
+		double b= pos1.m_l - a*pos1.m_c;
+		
+	
+		for(pos.m_c=pos1.m_c;pos.m_c<pos2.m_c;pos.m_c++)
 		{
-				
-			pos.m_c=(int)(a*pos.m_l + b );
+			pos.m_l= (int)(a*pos.m_c +b);
 			res.add(new Position2D(pos.m_l,pos.m_c));
+			
 		}
 		
 		return res;
 	}
-	
+	*/
 	public boolean estPlusGrand(Position2D target)
 	{
 		return this.getDistanceTo(Position2D.ORIGINE) > target.getDistanceTo(Position2D.ORIGINE);

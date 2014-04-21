@@ -1,11 +1,17 @@
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.Scanner;
-public class Joueur extends Perso
+
+import javax.swing.JPanel;
+public class Joueur extends Perso 
 {
 	private int m_or;
 	private Inventaire m_inventaire;
+	private String m_saisie=new String();
 	
 	public void init()
 	{
+		
 		m_inventaire=new Inventaire();
 		m_or=0;
 		m_vie = Global.VIE_JOUEUR ;
@@ -72,7 +78,7 @@ public class Joueur extends Perso
 	/**
 	 * Retourne False si le jeu ne doit pas continuer, True pour passer au tour suivant
 	 */
-	public boolean jouer()
+	public boolean jouer1()
 	{
 		Scanner sc=new Scanner(System.in);
 		String saisie = new String();
@@ -104,21 +110,27 @@ public class Joueur extends Perso
 		return true;
 	}
 	
-	public boolean jouerGraphique(String saisie)
+	public boolean jouer()
 	{
-		/*while(!Global.FENETRE.getPanel().existeEvenementClavier())
-		{
-			System.out.print('.');
-		}*/
+	
+		int key;
 		
-		if(saisie.compareTo("exit")==0)return false;
-		if(saisie.compareTo("8")==0 && m_monde.estAccessible(new Position2D(m_position,-1,0)) ) {move(-1,0);}
-		if(saisie.compareTo("5")==0 && m_monde.estAccessible(new Position2D(m_position,1,0))) {move(1,0);}
-		if(saisie.compareTo("4")==0 && m_monde.estAccessible(new Position2D(m_position,0,-1))) {move(0,-1);}
-		if(saisie.compareTo("6")==0 && m_monde.estAccessible(new Position2D(m_position,0,1))) {move(0,1);}
+		do
+		{
+			key=Global.FENETRE.getKey();
+		}
+		while(key==-1);
+		
+		if(key==27 ) return false;
+		else if(key==38) {move(-1,0);}
+		else if(key==40) {move(1,0);}
+		else if(key==37) {move(0,-1);}
+		else if(key==39) {move(0,1);}
+		else if(key==80) {prendreItemCase();}
 		
 		return true;
 	}
+	
 	public Inventaire getInventaire()
 	{
 		return m_inventaire;
@@ -132,6 +144,38 @@ public class Joueur extends Perso
 	{
 		System.out.println("[ Or: "+m_or+"]");
 	}
+	
+	public String getKey()
+	{
+		String m_saisie=new String();
+		
+		switch(Global.FENETRE.getKey())
+		{
+			case 38://haut
+				m_saisie="8";
+				break;
+			case 40://bas
+				m_saisie="5";
+				break;
+			case 37://gauche
+				m_saisie="4";
+				break;
+			case 39://droite
+				m_saisie="6";
+				break;
+			case 27://haut
+				m_saisie="exit";
+				break;
+				
+			default:
+				m_saisie="none";
+				break;
+		}
+		return m_saisie;
+	}
+		
+	
+
 	
 	
 }
