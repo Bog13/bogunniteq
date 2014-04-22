@@ -24,11 +24,11 @@ public class LotStr
 		Monde monde=new Monde();
 		monde.charger("test.txt");
 		
-		Global.FENETRE.changePanel(new Ecran.JeuPanel(monde) );
+		if(Global.MODE_GRAPHIQUE)Global.FENETRE.changePanel(new Ecran.JeuPanel(monde) );
 
 		Jeu jeu = new Jeu(monde);
 		jeu.jouer();
-		System.out.println("Exiting...");
+	
 		
 		
 	

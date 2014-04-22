@@ -78,7 +78,7 @@ public class Joueur extends Perso
 	/**
 	 * Retourne False si le jeu ne doit pas continuer, True pour passer au tour suivant
 	 */
-	public boolean jouer1()
+	public boolean jouer()
 	{
 		Scanner sc=new Scanner(System.in);
 		String saisie = new String();
@@ -110,7 +110,7 @@ public class Joueur extends Perso
 		return true;
 	}
 	
-	public boolean jouer()
+	public boolean jouerGraphique()
 	{
 	
 		int key;

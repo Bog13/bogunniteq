@@ -69,7 +69,7 @@ public class Monde
 		for(int i=1;i<=Global.NB_PNJS;i++)
 		{
 			// à modifier de sorte que différents types de monstres soient générés
-			m_population.add(new MonstreAgr(this,posHasard()));
+			//m_population.add(new MonstreAgr(this,posHasard()));
 		}
 	}
 	

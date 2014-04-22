@@ -31,17 +31,19 @@ public class Jeu
 			
 			///UPDATE
 			this.update();
-
-			///JOUEURS
-			m_alive= m_monde.getPerso(numPerso).jouer();
 			
+			
+	
 			///AFFICHAGE
 			if (numPerso ==0)
 			{
 				this.afficher();
 				System.out.println("TOUR "+m_tour+": "+ m_monde.getPerso(numPerso).getNom() )  ;
-
 			}
+			
+			///JOUEURS
+			if(Global.MODE_GRAPHIQUE==true) {m_alive= m_monde.getPerso(numPerso).jouerGraphique();}
+			else { m_alive= m_monde.getPerso(numPerso).jouer();}
 	
 			
 		}
@@ -51,7 +53,7 @@ public class Jeu
 	{
 		m_tour++;
 		m_monde.update();
-		Global.FENETRE.repaint();
+		if(Global.MODE_GRAPHIQUE==true) {Global.FENETRE.repaint();}
 	}
 	
 	public void afficher()

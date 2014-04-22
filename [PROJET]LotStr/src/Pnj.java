@@ -23,6 +23,12 @@ public class Pnj extends Perso
 		System.out.println(m_nom + " a joué");
 		return true;
 	}
+
+	@Override
+	public boolean jouerGraphique()
+	{
+		return jouer();
+	}
 	
 	
 	
