@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class Global
 {
-	final public static boolean MODE_GRAPHIQUE=false;
+	final public static boolean MODE_GRAPHIQUE=true;
 	final public static int ECRAN_LARGEUR=1024;
 	final public static int ECRAN_HAUTEUR=576;
 	final public static int CASE_LARGEUR=14;
@@ -29,5 +29,11 @@ public class Global
 	final public static int DEF_JOUEUR = 2;
 	
 	final public static int NB_PNJS = 0;
+	
+	final public static int KEY_HAUT=0;
+	final public static int KEY_BAS=1;
+	final public static int KEY_GAUCHE=2;
+	final public static int KEY_DROITE=3;
+	final public static int KEY_NONE=-1;
 	
 }

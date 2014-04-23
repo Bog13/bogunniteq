@@ -122,10 +122,10 @@ public class Joueur extends Perso
 		while(key==-1);
 		
 		if(key==27 ) return false;
-		else if(key==38) {move(-1,0);}
-		else if(key==40) {move(1,0);}
-		else if(key==37) {move(0,-1);}
-		else if(key==39) {move(0,1);}
+		else if(key==Global.KEY_HAUT) {move(-1,0);}
+		else if(key==Global.KEY_BAS) {move(1,0);}
+		else if(key==Global.KEY_GAUCHE) {move(0,-1);}
+		else if(key==Global.KEY_DROITE) {move(0,1);}
 		else if(key==80) {prendreItemCase();}
 		
 		return true;
