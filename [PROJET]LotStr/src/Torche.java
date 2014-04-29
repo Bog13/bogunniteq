@@ -21,23 +21,21 @@ public class Torche extends Activable
 	 */
 	public void activer(int timer)
 	{
+		super.activer(Global.TORCHE_DUREE);
 		m_estLumineux=true;
-		m_on=true;
-		m_timer=timer;
 	}
 	
 	
 	public void desactiver()
 	{
+		super.desactiver();
 		m_estLumineux=false;
-		m_on=false;
-		m_timer=-1;
+		
 	}
 	
 	public void update()
 	{
-		if(m_timer>-1)m_timer--;
-		else{ desactiver(); }
+		super.update();
 		
 		if(m_on)m_look='T';
 		else m_look='t';

@@ -137,7 +137,12 @@ public class Case
 	
 	public void setId(char id) {m_id=id;}
 	public void setLook(char look) {m_look=look;}
-	public char getLook() {return m_look;}
+	
+	public char getLook()
+	{
+		if(m_hasItem)return m_item.getLook();
+		return m_look;
+	}
 
 	public void setObstacle( boolean b )
 	{
@@ -162,6 +167,8 @@ public class Case
 	}
 	
 	public Item getItem() {return m_item;}
+
+	
 	
 	
 }

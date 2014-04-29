@@ -15,13 +15,31 @@ public abstract class Activable extends Case
 		m_on = false;
 	}
 
-	public abstract void activer();
+	public void activer()
+	{
+		m_on=true;
+	}
 
-	public abstract void activer( int timer );
-
-	public abstract void desactiver();
-
-	public abstract void update();
+	
+	
+	public void activer(int timer)
+	{
+		m_on=true;
+		m_timer=timer;
+	}
+	
+	
+	public void desactiver()
+	{
+		m_on=false;
+		m_timer=-1;
+	}
+	
+	public void update()
+	{
+		if(m_timer>-1)m_timer--;
+		else{ desactiver(); }
+	}
 
 	public boolean estActif()
 	{
