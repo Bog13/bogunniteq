@@ -142,7 +142,7 @@ public class Joueur extends Perso
 	
 	public void afficheHud()
 	{
-		System.out.println("[ Or: "+m_or+"]");
+		System.out.println("[ Or: "+m_or+"]" + " [Vie: "+ m_vie+"]");
 	}
 	
 	public String getKey()

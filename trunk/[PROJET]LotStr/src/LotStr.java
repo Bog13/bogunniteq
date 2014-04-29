@@ -23,8 +23,6 @@ public class LotStr
 		
 		Monde monde=new Monde();
 		monde.charger("test.txt");
-		
-		if(Global.MODE_GRAPHIQUE)Global.FENETRE.changePanel(new Ecran.JeuPanel(monde) );
 
 		Jeu jeu = new Jeu(monde);
 		jeu.jouer();

@@ -15,6 +15,7 @@ public class Monde
 	private Joueur				m_joueur;
 	private Vector<Perso>		m_population;
 	private Vector<Position2D>	m_positionLumineux;
+	private Vector<Position2D> m_positionActivable;
 
 	public Monde()
 	{
@@ -26,9 +27,10 @@ public class Monde
 		m_population.add(m_joueur);
 
 		m_positionLumineux = new Vector<Position2D>();
-
+		m_positionActivable = new Vector<Position2D>();
+		
 		initMonde();
-		this.initPositionLumineux();
+		this.initPosition();
 		initMur();
 
 	}
@@ -88,13 +90,17 @@ public class Monde
 	
 	public void Init()
 	{
-		this.initPositionLumineux();
+		m_monde[3][2] = new Anneau('A');
+		
+		initPosition();
 		initMur();
 		
 		getCase(Position2D.position(2,2)).mettreItem( new PieceOr('$') ); ////DEBUG////
 
 		placerPnjs();
 		getCase(Position2D.position(2,15)).mettreItem( new PieceOr('$') ); ////DEBUG////
+		
+		
 
 	}
 	
@@ -137,19 +143,19 @@ public class Monde
 							
 							if( estVoisinMP(parcours,1) )
 							{
-								pcase.setLook('^');//haut
+								pcase.setLook('-');//haut
 							}
 							else if( estVoisinMP(parcours,0) )
 							{
-								pcase.setLook('v');//bas
+								pcase.setLook('-');//bas
 							}
 							else if( estVoisinMP(parcours,3) )
 							{
-								pcase.setLook('<');//gauche
+								pcase.setLook('|');//gauche
 							}
 							else if( estVoisinMP(parcours,2))
 							{
-								pcase.setLook('>');//droite
+								pcase.setLook('|');//droite
 							}
 							else pcase.setLook('e');
 							
@@ -182,7 +188,7 @@ public class Monde
 		
 	}
 
-	public void initPositionLumineux()
+	public void initPosition()
 	{
 		Position2D parcours=null;
 		for ( int i = 0; i < Global.NB_CASE_HAUTEUR; i++ )
@@ -190,11 +196,18 @@ public class Monde
 			for ( int j = 0; j < Global.NB_CASE_LARGEUR; j++ )
 			{
 				parcours = new Position2D(i, j);
+				
 				if ( this.getCase(parcours) instanceof Torche
 						|| this.getCase(parcours).estLumineux() )
 				{
 					m_positionLumineux.add(parcours);
 				}
+				
+				if(this.getCase(parcours) instanceof Activable)
+				{
+					m_positionActivable.add(parcours);
+				}
+				
 			}
 		}
 	}
@@ -385,13 +398,17 @@ public class Monde
 
 				switch ( actuel )
 				{
-				default:
-					m_monde[i][j] = new Case(actuel);
-					break;
-				case 'T':
-					m_monde[i][j] = new Torche(actuel);
-
-					break;
+					default:
+						m_monde[i][j] = new Case(actuel);
+						break;
+						
+					case 'T':
+						m_monde[i][j] = new Torche(actuel);
+						break;
+					case 'P':
+						m_monde[i][j] = new Porte(actuel);
+						break;
+				
 				}
 			}
 		}
@@ -408,9 +425,10 @@ public class Monde
 	 */
 	public void update()
 	{
-		updateActivationTorche();
-		updateTorche();
-		updateLumiere();
+		updateActivationActivable();
+		updateActivable();
+		updateLumineux();
+		updateSwitchOffLumineux();
 		updateCombat();
 	}
 	
@@ -503,8 +521,29 @@ public class Monde
 
 	
 		
-		
-		
+	
+	public void updateActivationActivable()
+	{
+		for ( Position2D pos: m_positionActivable)
+		{
+			if ( this.existePersoPosition(pos) )
+			{
+				
+				switch(getCase(pos).getId())
+				{
+					case 'P':
+						((Activable) this.getCase(pos)).activer(1);
+						break;
+						
+					default:
+						((Activable) this.getCase(pos)).activer(3);
+						break;
+				}
+				
+			}
+		}
+			
+	}
 	
 	
 
@@ -521,15 +560,26 @@ public class Monde
 		}
 	}
 
-	public void updateTorche()
+	public void updateLumineux()
 	{
-		for ( int i = 0; i < m_positionLumineux.size(); i++ )
+		for (Position2D pos: m_positionLumineux)
 		{
-			((Torche) this.getCase(m_positionLumineux.get(i))).update();
+			if( !(getCase(pos) instanceof Activable) )
+			{
+				( (Torche) this.getCase(pos) ).update();
+			}
+		}
+	}
+	
+	public void updateActivable()
+	{
+		for ( int i = 0; i < m_positionActivable.size(); i++ )
+		{
+			((Activable) this.getCase(m_positionActivable.get(i))).update();
 		}
 	}
 
-	public void updateLumiere()
+	public void updateSwitchOffLumineux()
 	{
 		for ( int i = 0; i < Global.NB_CASE_HAUTEUR; i++ )
 		{

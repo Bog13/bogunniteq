@@ -11,6 +11,7 @@ public class Jeu
 	private Vector<Perso> m_perso;
 	private Monde m_monde;
 	private int m_tour;
+	private boolean m_gagne;
 	
 	public Jeu(Monde monde)
 	{
@@ -18,11 +19,14 @@ public class Jeu
 		m_monde=monde;
 		
 		this.m_alive=true;
+		m_gagne=false;
 	}
 	
 	public void jouer()
 	{
 		int numPerso=0;
+		
+		intro();
 		
 		while(m_alive==true)
 		{
@@ -35,25 +39,47 @@ public class Jeu
 			
 	
 			///AFFICHAGE
-			if (numPerso ==0)
+			if (numPerso ==0 && m_alive)
 			{
 				this.afficher();
 				System.out.println("TOUR "+m_tour+": "+ m_monde.getPerso(numPerso).getNom() )  ;
 			}
 			
 			///JOUEURS
-			if(Global.MODE_GRAPHIQUE==true) {m_alive= m_monde.getPerso(numPerso).jouerGraphique();}
-			else { m_alive= m_monde.getPerso(numPerso).jouer();}
+			m_alive= m_monde.getPerso(numPerso).jouer();
 	
 			
 		}
+	}
+	
+	public void intro()
+	{
+		System.out.println("Lord Of The String");
+	}
+	
+	public void win()
+	{
+		m_gagne=true;
+		System.out.println("Bravo tu as gagné !");
+	}
+	
+	public void loose()
+	{
+		m_gagne=false;
+		System.out.println("Tu as perdu");
 	}
 	
 	public void update()
 	{
 		m_tour++;
 		m_monde.update();
-		if(Global.MODE_GRAPHIQUE==true) {Global.FENETRE.repaint();}
+		
+		if(Global.ringFound)
+		{
+			m_alive=false;
+			win();
+			
+		}
 	}
 	
 	public void afficher()
