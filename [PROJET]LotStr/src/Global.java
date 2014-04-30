@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class Global
 {
-	final public static boolean MODE_GRAPHIQUE=false;
+	final public static boolean MODE_GRAPHIQUE=true;
 	final public static int ECRAN_LARGEUR=1024;
 	final public static int ECRAN_HAUTEUR=576;
 	final public static int CASE_LARGEUR=14;
@@ -18,7 +18,7 @@ public class Global
 	final public static int NB_CASE_LARGEUR=40;//40
 	final public static int NB_CASE_HAUTEUR=30;//30
 	
-	final public static Ecran.Fenetre FENETRE = null;
+	final public static Ecran.Fenetre FENETRE = new Ecran.Fenetre();
 	final public static int TORCHE_RAYON=8;
 	final public static int TORCHE_DUREE=20;
 	final public static int JOUEUR_RAYON=10;
@@ -40,5 +40,6 @@ public class Global
 	
 	
 	public static boolean ringFound=false;
+	public static boolean keyPressed=false;
 	
 }

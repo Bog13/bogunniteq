@@ -8,10 +8,23 @@ public class Joueur extends Perso
 	private int m_or;
 	private Inventaire m_inventaire;
 	private String m_saisie=new String();
+	private Joueur_TypeJeu m_typeJeu;
+	
+	public void initTypeJeu()
+	{
+		if(Global.MODE_GRAPHIQUE)
+		{
+			m_typeJeu= new JeuGraphique();
+		}
+		else
+		{
+			m_typeJeu= new JeuConsole(this);
+		}
+	}
 	
 	public void init()
 	{
-		
+		initTypeJeu();
 		m_inventaire=new Inventaire();
 		m_or=0;
 		m_vie = Global.VIE_JOUEUR ;
@@ -24,6 +37,7 @@ public class Joueur extends Perso
 	{
 		super(monde);
 		init();
+		
 	}
 	
 	public void prendreItem(Item it)
@@ -78,36 +92,11 @@ public class Joueur extends Perso
 	/**
 	 * Retourne False si le jeu ne doit pas continuer, True pour passer au tour suivant
 	 */
+	
+	
 	public boolean jouer()
 	{
-		Scanner sc=new Scanner(System.in);
-		String saisie = new String();
-
-		boolean saisieCorrect=false;
-		
-		do
-		{
-			saisie=sc.next();
-			
-			saisieCorrect=  (saisie.compareTo("p")==0) ||
-							(saisie.compareTo("8")==0) ||
-							(saisie.compareTo("5")==0) ||
-							(saisie.compareTo("4")==0) ||
-							(saisie.compareTo("6")==0) ||
-							(saisie.compareTo("exit")==0) ;
-		}
-		while (!saisieCorrect);
-		
-		if(saisie.compareTo("exit")==0)return false;
-		if(saisie.compareTo("8")==0  ) {move(-1,0);}
-		if(saisie.compareTo("5")==0 ) {move(1,0);}
-		if(saisie.compareTo("4")==0 ) {move(0,-1);}
-		if(saisie.compareTo("6")==0 ) {move(0,1);}
-		if(saisie.compareTo("p")==0) {prendreItemCase();}
-		
-		
-		
-		return true;
+		return m_typeJeu.jouer();
 	}
 	
 	
