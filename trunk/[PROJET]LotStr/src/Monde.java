@@ -408,8 +408,8 @@ public class Monde implements Observable
 		{
 			for ( int j = 0; j < Global.NB_CASE_LARGEUR; j++ )
 			{
-				actuel = contenu.charAt(j + i * (Global.NB_CASE_LARGEUR + 1)); // Pourquoi
-																				// +1
+				actuel = contenu.charAt(j + i * (Global.NB_CASE_LARGEUR +1)); // Pourquoi
+																	// +1
 																				// ?
 																				// :o
 
