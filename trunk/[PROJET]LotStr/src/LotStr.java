@@ -23,7 +23,13 @@ public class LotStr
 		
 		Monde monde=new Monde();
 		monde.charger("test.txt");
-
+		
+		Commande commande = new Commande(monde.getJoueur());
+		
+		Global.FENETRE.changePanel(new Ecran.EcranJeuPanel());
+		
+		monde.addObs((Observateur) Global.FENETRE.getPanel());
+		
 		Jeu jeu = new Jeu(monde);
 		jeu.jouer();
 	

@@ -1,5 +1,5 @@
 
 public interface Observateur
 {
-	public void update(boolean b);
+	public void update(char[][] monde);
 }

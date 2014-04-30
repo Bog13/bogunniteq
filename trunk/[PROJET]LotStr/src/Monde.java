@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Vector;
 
 
@@ -9,18 +10,19 @@ import java.util.Vector;
  date: 7/3/14
  */
 
-public class Monde
+public class Monde implements Observable
 {
 	private Case[][]			m_monde;
 	private Joueur				m_joueur;
 	private Vector<Perso>		m_population;
 	private Vector<Position2D>	m_positionLumineux;
 	private Vector<Position2D> m_positionActivable;
+	private ArrayList<Observateur> m_alObs;
 
-	public Monde()
+	public Monde() 
 	{
-
-		m_monde = new Case[Global.ECRAN_HAUTEUR][Global.ECRAN_LARGEUR];
+		m_alObs=new ArrayList<Observateur>();
+		m_monde = new Case[Global.NB_CASE_HAUTEUR][Global.NB_CASE_LARGEUR];
 
 		m_joueur = new Joueur(this, new Position2D(0, 0));
 		m_population = new Vector<Perso>();
@@ -446,6 +448,8 @@ public class Monde
 		updateSwitchOffLumineux();
 		updateCombat();
 		updateTest();
+		updateVisibleAutour();
+		updateObs();
 	}
 	
 	
@@ -684,6 +688,61 @@ public class Monde
 		
 		
 
+	}
+
+	
+	public void addObs( Observateur obs )
+	{
+		m_alObs.add(obs);
+		
+	}
+
+	
+	public void delObs()
+	{
+		m_alObs=new ArrayList<Observateur>();
+		
+	}
+
+	public char[][] makeCharTab()
+	{
+		char[][] charTab=new char[Global.NB_CASE_HAUTEUR][Global.NB_CASE_LARGEUR];
+		
+		for ( int i = 0; i < Global.NB_CASE_HAUTEUR; i++ )
+		{
+			for ( int j = 0; j < Global.NB_CASE_LARGEUR; j++ )
+			{
+				
+				if(m_monde[i][j].estVisible())
+				{
+					if(existePersoPosition(Position2D.position(i,j)))
+					{
+						charTab[i][j]='C';
+					}
+					else
+					{
+						charTab[i][j]=m_monde[i][j].getLook();
+					}
+				}
+				else
+				{
+					charTab[i][j]='@';
+				}
+				
+			}
+		}
+		
+		return charTab;
+	}
+	
+	public void updateObs()
+	{
+		
+		for(Observateur obs: m_alObs)
+		{
+			obs.update(makeCharTab());
+		}
+		
 	}
 	
 	//System.out.println('a');
