@@ -24,11 +24,7 @@ public class Pnj extends Perso
 		return true;
 	}
 
-	@Override
-	public boolean jouerGraphique()
-	{
-		return jouer();
-	}
+	
 	
 	
 	

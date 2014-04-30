@@ -110,26 +110,7 @@ public class Joueur extends Perso
 		return true;
 	}
 	
-	public boolean jouerGraphique()
-	{
 	
-		int key;
-		
-		do
-		{
-			key=Global.FENETRE.getKey();
-		}
-		while(key==-1);
-		
-		if(key==27 ) return false;
-		else if(key==Global.KEY_HAUT) {move(-1,0);}
-		else if(key==Global.KEY_BAS) {move(1,0);}
-		else if(key==Global.KEY_GAUCHE) {move(0,-1);}
-		else if(key==Global.KEY_DROITE) {move(0,1);}
-		else if(key==80) {prendreItemCase();}
-		
-		return true;
-	}
 	
 	public Inventaire getInventaire()
 	{
@@ -145,34 +126,7 @@ public class Joueur extends Perso
 		System.out.println("[ Or: "+m_or+"]" + " [Vie: "+ m_vie+"]");
 	}
 	
-	public String getKey()
-	{
-		String m_saisie=new String();
-		
-		switch(Global.FENETRE.getKey())
-		{
-			case 38://haut
-				m_saisie="8";
-				break;
-			case 40://bas
-				m_saisie="5";
-				break;
-			case 37://gauche
-				m_saisie="4";
-				break;
-			case 39://droite
-				m_saisie="6";
-				break;
-			case 27://haut
-				m_saisie="exit";
-				break;
-				
-			default:
-				m_saisie="none";
-				break;
-		}
-		return m_saisie;
-	}
+	
 		
 	
 

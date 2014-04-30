@@ -69,5 +69,10 @@ public class Outil
 		return contenu;
 	}
 	
+	public static void debugMsg(String msg)
+	{
+		System.out.println("[DEBUG] "+msg+" !");
+	}
+	
 	
 }

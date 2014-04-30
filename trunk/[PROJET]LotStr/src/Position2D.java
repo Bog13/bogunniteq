@@ -165,7 +165,7 @@ public class Position2D
 	
 	public static Vector<Position2D> positionEntre( Position2D pos1, Position2D pos2 )
 	{
-		return bresenham(pos1.m_c,pos1.m_l,pos2.m_c,pos2.m_l);
+		return bresenham(pos1.m_l,pos1.m_c,pos2.m_l,pos2.m_c);
 	}
 	
 	/*public static Vector<Position2D> positionEntre( Position2D pos1, Position2D pos2 )

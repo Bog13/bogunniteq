@@ -169,6 +169,9 @@ public class Case
 	public Item getItem() {return m_item;}
 
 	
-	
+	public Position2D getPosition()
+	{
+		return m_position;
+	}
 	
 }
