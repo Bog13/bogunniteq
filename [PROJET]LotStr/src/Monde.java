@@ -136,7 +136,7 @@ public class Monde
 					switch( nbVoisinMP(parcours) )
 					{
 						case 0://bloc seul
-							pcase.setLook('1');
+							pcase.setLook('X');
 							break;
 							
 						case 1://extremite
@@ -175,7 +175,9 @@ public class Monde
 							break;
 							
 						case 4://interieur
-							pcase.change(new Case('0'));
+							//pcase.change(new Case('0'));
+							pcase.setLook('0');
+							//pcase.setId('0');
 							break;
 						default:
 							pcase.setLook('X');
@@ -183,6 +185,19 @@ public class Monde
 					}
 				}
 				
+			}
+		}
+		
+		for ( int i = 0; i < Global.NB_CASE_HAUTEUR; i++ )
+		{
+			for ( int j = 0; j < Global.NB_CASE_LARGEUR; j++ )
+			{
+				if(getCase(Position2D.position(i,j)).getLook()=='0')
+				{
+					getCase(Position2D.position(i,j)).setId('0');
+					getCase(Position2D.position(i,j)).setLook(' ');
+					getCase(Position2D.position(i,j)).initPropriete('0');
+				}
 			}
 		}
 		
@@ -430,6 +445,7 @@ public class Monde
 		updateLumineux();
 		updateSwitchOffLumineux();
 		updateCombat();
+		updateTest();
 	}
 	
 	
@@ -468,6 +484,11 @@ public class Monde
 	
 		}
 	}
+	
+	public void updateTest()
+	{
+		
+	}
 
 	public void setCaseVisibleAutour( Position2D pos, int rayon )
 	{
@@ -483,8 +504,20 @@ public class Monde
 				&& pos.getDistanceTo(parcours) <=rayon
 				)
 				{
-					//estVisible=!(murEntre(pos,parcours));
+					
+					/*DEBUG*/
 					estVisible=true;
+					
+					
+					if( murEntre(m_joueur.getPosition(),parcours))
+					{
+						estVisible=false;
+					}else estVisible=true;
+					
+					
+					
+					/*FIN DEBUG*/
+					
 					this.getCase(parcours).setVisible(estVisible);
 					
 				}
@@ -496,27 +529,28 @@ public class Monde
 
 	
 	
+	public boolean estUnMur( Position2D pos)
+	{
+		return getCase(pos).getId()=='M';
+	}
+	
+	public boolean estUnePorte( Position2D pos)
+	{
+		return getCase(pos).getId()=='P';
+	}
+
 	public boolean murEntre(Position2D A,Position2D B)
 	{
 		Vector<Position2D> vec=Position2D.positionEntre(A,B);
-		boolean existeMur=false;
-	
-		int i=0;
-	
-		while(i<vec.size() && !existeMur)
+		vec.remove(vec.size()-1);
+		for(Position2D pos: vec)
 		{
-			if(getCase(vec.get(i)).getId()=='M' || getCase(vec.get(i)).getId()=='P' )
+			if(estDansMonde(pos) && (estUnMur(pos) || estUnePorte(pos)))
 			{
-				existeMur=true;
+				return true;
 			}
-			
-			i++;
 		}
-		
-		
-		
-
-		return existeMur;
+		return false;
 	}
 
 	
@@ -621,7 +655,7 @@ public class Monde
 				/*else if(parcours.estEntre(Position2D.position(0,0),Position2D.position(15,20)))
 				{
 					System.out.print('X');
-				}else System.out.print(' ');
+				}else System.out.print(' '); DEBUG: POUR TESTER LES LIGNES
 				*/
 				else
 				{

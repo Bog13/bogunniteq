@@ -70,7 +70,7 @@ public abstract class Perso
 	}
 	
 	abstract public boolean jouer();
-	abstract public boolean jouerGraphique();
+
 	public void move(int x,int y)
 	{
 		int newX=m_position.getL()+x;

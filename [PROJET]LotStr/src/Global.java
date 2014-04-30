@@ -18,7 +18,7 @@ public class Global
 	final public static int NB_CASE_LARGEUR=40;//40
 	final public static int NB_CASE_HAUTEUR=30;//30
 	
-	final public static Ecran.Fenetre FENETRE = new Ecran.Fenetre();
+	final public static Ecran.Fenetre FENETRE = null;
 	final public static int TORCHE_RAYON=8;
 	final public static int TORCHE_DUREE=20;
 	final public static int JOUEUR_RAYON=10;
@@ -28,7 +28,7 @@ public class Global
 	final public static int ATK_JOUEUR = 5;
 	final public static int DEF_JOUEUR = 2;
 	
-	final public static int NB_PNJS = 0;
+	final public static int NB_PNJS = 3;
 	
 	final public static int KEY_HAUT=0;
 	final public static int KEY_BAS=1;
