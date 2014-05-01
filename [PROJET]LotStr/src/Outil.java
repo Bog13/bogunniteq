@@ -1,4 +1,7 @@
+import java.awt.Image;
 import java.io.*;
+
+import javax.imageio.ImageIO;
 
 /**
  * Ensemble de fonctions basiques
@@ -67,6 +70,23 @@ public class Outil
 		}
 		
 		return contenu;
+	}
+	
+	public static Image loadImage(String path)
+	{
+		Image img;
+		try
+		{
+			img = ImageIO.read(new File(path));
+			return img;
+		}
+		catch ( IOException e )
+		{
+			
+			e.printStackTrace();
+			return null;
+		}
+		
 	}
 	
 	public static void debugMsg(String msg)

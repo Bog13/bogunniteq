@@ -98,7 +98,9 @@ public class Monde implements ObservableMonde
 		initMur();
 		
 		getCase(Position2D.position(2,2)).mettreItem( new PieceOr('$') ); ////DEBUG////
-
+		getCase(Position2D.position(2,3)).mettreItem( new PieceOr('$') ); ////DEBUG////
+		getCase(Position2D.position(2,4)).mettreItem( new PieceOr('$') ); ////DEBUG////
+		
 		placerPnjs();
 		getCase(Position2D.position(2,15)).mettreItem( new PieceOr('$') ); ////DEBUG////
 		
@@ -451,6 +453,7 @@ public class Monde implements ObservableMonde
 		updateVisibleAutour();
 		updateObs();
 		updatePrendreOr();
+		m_joueur.update();
 	}
 	
 	
@@ -693,11 +696,7 @@ public class Monde implements ObservableMonde
 			System.out.print('\n');
 		}
 		
-		
-		
-		
-		
-
+	
 	}
 
 	

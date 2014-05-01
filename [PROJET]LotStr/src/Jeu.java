@@ -39,12 +39,14 @@ public class Jeu
 			
 	
 			///AFFICHAGE
-			if (numPerso ==0 && m_alive)
+			if(!Global.MODE_GRAPHIQUE)
 			{
-				this.afficher();
-				System.out.println("TOUR "+m_tour+": "+ m_monde.getPerso(numPerso).getNom() )  ;
+				if (numPerso ==0 && m_alive)
+				{
+					this.afficher();
+					System.out.println("TOUR "+m_tour+": "+ m_monde.getPerso(numPerso).getNom() )  ;
+				}
 			}
-			
 			///JOUEURS
 			m_alive= m_monde.getPerso(numPerso).jouer();
 	
@@ -60,13 +62,27 @@ public class Jeu
 	public void win()
 	{
 		m_gagne=true;
-		System.out.println("Bravo tu as gagné !");
+		if(Global.MODE_GRAPHIQUE)
+		{
+			Global.FENETRE.changePanel(new Ecran.MenuPanel());
+		}
+		else
+		{
+			System.out.println("Bravo tu as gagné !");
+		}
 	}
 	
 	public void loose()
 	{
 		m_gagne=false;
-		System.out.println("Tu as perdu");
+		if(Global.MODE_GRAPHIQUE)
+		{
+			Global.FENETRE.changePanel(new Ecran.MenuPanel());
+		}
+		else
+		{
+			System.out.println("Tu as perdu...");
+		}
 	}
 	
 	public void update()
