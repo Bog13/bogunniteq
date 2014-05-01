@@ -31,6 +31,7 @@ public class Global
 	final public static int DEF_JOUEUR = 2;
 	
 	final public static int NB_PNJS = 3;
+	final public static int NB_PIECE = 10;
 	
 	final public static int KEY_HAUT=0;
 	final public static int KEY_BAS=1;

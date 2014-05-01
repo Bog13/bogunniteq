@@ -85,6 +85,10 @@ public class Position2D
 		return new Position2D(m_l,m_c);
 	}
 	
+	public static Position2D random()
+	{
+		return Position2D.position(Outil.hasard(0,Global.NB_CASE_HAUTEUR),Outil.hasard(0,Global.NB_CASE_LARGEUR));
+	}
 	
 	public boolean estEntre(Position2D A, Position2D B )
 	{
@@ -237,6 +241,10 @@ public class Position2D
 				+ Math.pow(m_c - cible.m_c, 2));
 	}
 	
+	public String toString()
+	{
+		return "( "+m_l+", "+m_c+" )";
+	}
 	public Vector<Position2D> getVoisin()
 	{
 		Vector<Position2D> voisin= new Vector<Position2D>();

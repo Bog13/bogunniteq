@@ -72,6 +72,11 @@ public class Outil
 		return contenu;
 	}
 	
+	public static int hasard(int a,int b)
+	{
+		return ((int)(Math.random()*(b-a) +a ));
+	}
+	
 	public static Image loadImage(String path)
 	{
 		Image img;
