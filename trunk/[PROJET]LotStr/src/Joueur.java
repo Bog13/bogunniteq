@@ -1,14 +1,16 @@
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import javax.swing.JPanel;
-public class Joueur extends Perso 
+public class Joueur extends Perso implements ObservableJoueur
 {
 	private int m_or;
 	private Inventaire m_inventaire;
 	private String m_saisie=new String();
 	private Joueur_TypeJeu m_typeJeu;
+	private ArrayList<ObservateurJoueur> al_obs=null;
 	
 	public void initTypeJeu()
 	{
@@ -24,6 +26,8 @@ public class Joueur extends Perso
 	
 	public void init()
 	{
+		al_obs= new ArrayList<ObservateurJoueur>();
+				
 		initTypeJeu();
 		m_inventaire=new Inventaire();
 		m_or=0;
@@ -44,7 +48,7 @@ public class Joueur extends Perso
 	{
 		if( it instanceof PieceOr)
 		{
-			m_or++;
+			m_or=Global.VALEUR_OR;
 		}
 		else
 		{
@@ -96,7 +100,10 @@ public class Joueur extends Perso
 	
 	public boolean jouer()
 	{
-		return m_typeJeu.jouer();
+		boolean jeuBool=m_typeJeu.jouer();	
+		
+		return jeuBool;
+	
 	}
 	
 	
@@ -112,8 +119,41 @@ public class Joueur extends Perso
 	
 	public void afficheHud()
 	{
-		System.out.println("[ Or: "+m_or+"]" + " [Vie: "+ m_vie+"]");
+		if(Global.MODE_GRAPHIQUE) 
+		{
+			updateObs();
+		}
+		else
+		{
+			System.out.println("[ Or: "+m_or+"]" + " [Vie: "+ m_vie+"]");
+		}
+		
 	}
+
+
+	public void addObs( ObservateurJoueur obs )
+	{
+		al_obs.add(obs);
+	}
+
+	
+	public void delObs()
+	{
+		al_obs= new ArrayList<ObservateurJoueur>();
+		
+	}
+
+
+	public void updateObs()
+	{
+		for(ObservateurJoueur obs: al_obs)
+		{
+			obs.update(m_vie,m_or);
+		}
+		
+	}
+
+	
 	
 	
 		

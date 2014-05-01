@@ -18,13 +18,15 @@ public class Global
 	final public static int NB_CASE_LARGEUR=40;//40
 	final public static int NB_CASE_HAUTEUR=30;//30
 	
+	
 	final public static Ecran.Fenetre FENETRE = new Ecran.Fenetre();
+	
 	final public static int TORCHE_RAYON=8;
 	final public static int TORCHE_DUREE=20;
-	final public static int JOUEUR_RAYON=10;
+	final public static int JOUEUR_RAYON=6;
 	
 	final public static int VIE_JOUEUR = 10;
-	final public static String NOM_JOUEUR = "Frodet Saquon";
+	final public static String NOM_JOUEUR = "Zdow-Wah";
 	final public static int ATK_JOUEUR = 5;
 	final public static int DEF_JOUEUR = 2;
 	
@@ -37,7 +39,7 @@ public class Global
 	final public static int KEY_PRENDRE=4;
 	final public static int KEY_NONE=-1;
 	
-	
+	final public static int VALEUR_OR=10;
 	
 	public static boolean ringFound=false;
 	public static boolean keyPressed=false;

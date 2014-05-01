@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 public class Anneau extends Activable 
 {
-	private ArrayList<Observateur> m_obsList=new ArrayList<Observateur>();
+	private ArrayList<ObservateurMonde> m_obsList=new ArrayList<ObservateurMonde>();
 	
 	public Anneau(char id)
 	{
