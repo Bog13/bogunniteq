@@ -48,7 +48,7 @@ public class Joueur extends Perso implements ObservableJoueur
 	{
 		if( it instanceof PieceOr)
 		{
-			m_or=Global.VALEUR_OR;
+			m_or+=Global.VALEUR_OR;
 		}
 		else
 		{
@@ -101,11 +101,14 @@ public class Joueur extends Perso implements ObservableJoueur
 	public boolean jouer()
 	{
 		boolean jeuBool=m_typeJeu.jouer();	
-		
 		return jeuBool;
 	
 	}
 	
+	public void update()
+	{
+		updateObs();
+	}
 	
 	
 	public Inventaire getInventaire()
@@ -119,12 +122,13 @@ public class Joueur extends Perso implements ObservableJoueur
 	
 	public void afficheHud()
 	{
-		if(Global.MODE_GRAPHIQUE) 
+		if(!Global.MODE_GRAPHIQUE) 
 		{
-			updateObs();
+			
 		}
 		else
 		{
+			
 			System.out.println("[ Or: "+m_or+"]" + " [Vie: "+ m_vie+"]");
 		}
 		
