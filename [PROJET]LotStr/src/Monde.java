@@ -10,18 +10,18 @@ import java.util.Vector;
  date: 7/3/14
  */
 
-public class Monde implements Observable
+public class Monde implements ObservableMonde
 {
 	private Case[][]			m_monde;
 	private Joueur				m_joueur;
 	private Vector<Perso>		m_population;
 	private Vector<Position2D>	m_positionLumineux;
 	private Vector<Position2D> m_positionActivable;
-	private ArrayList<Observateur> m_alObs;
+	private ArrayList<ObservateurMonde> m_alObs;
 
 	public Monde() 
 	{
-		m_alObs=new ArrayList<Observateur>();
+		m_alObs=new ArrayList<ObservateurMonde>();
 		m_monde = new Case[Global.NB_CASE_HAUTEUR][Global.NB_CASE_LARGEUR];
 
 		m_joueur = new Joueur(this, new Position2D(0, 0));
@@ -450,6 +450,7 @@ public class Monde implements Observable
 		updateTest();
 		updateVisibleAutour();
 		updateObs();
+		updatePrendreOr();
 	}
 	
 	
@@ -462,6 +463,14 @@ public class Monde implements Observable
 	{
 		//if () 
 		
+	}
+	
+	public void updatePrendreOr()
+	{
+		if( getCase (m_joueur.getPosition()).getLook()=='$' )
+		{
+			m_joueur.prendreItemCase();
+		}
 	}
 
 	/**
@@ -572,6 +581,7 @@ public class Monde implements Observable
 					case 'P':
 						((Activable) this.getCase(pos)).activer(1);
 						break;
+					
 						
 					default:
 						((Activable) this.getCase(pos)).activer(3);
@@ -691,7 +701,7 @@ public class Monde implements Observable
 	}
 
 	
-	public void addObs( Observateur obs )
+	public void addObs( ObservateurMonde obs )
 	{
 		m_alObs.add(obs);
 		
@@ -700,7 +710,7 @@ public class Monde implements Observable
 	
 	public void delObs()
 	{
-		m_alObs=new ArrayList<Observateur>();
+		m_alObs=new ArrayList<ObservateurMonde>();
 		
 	}
 
@@ -738,7 +748,7 @@ public class Monde implements Observable
 	public void updateObs()
 	{
 		
-		for(Observateur obs: m_alObs)
+		for(ObservateurMonde obs: m_alObs)
 		{
 			obs.update(makeCharTab());
 		}
