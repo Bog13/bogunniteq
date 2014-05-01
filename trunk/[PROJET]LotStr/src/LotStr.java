@@ -17,6 +17,8 @@ import java.util.Scanner;
 
 
 
+
+
 public class LotStr
 {
 	
@@ -24,18 +26,17 @@ public class LotStr
 	{
 		
 		Monde monde=new Monde();
+		Jeu jeu = new Jeu(monde);
+		
 		monde.charger("test.txt");
+		Global.MONDE=monde;
 		
 		Commande commande = new Commande(monde.getJoueur());
 		
-		Global.FENETRE.changePanel(new Ecran.JeuPanel(monde));
 		
-
-		
-		monde.addObs( (ObservateurMonde) Global.FENETRE.getPanel());
-		monde.getJoueur().addObs((ObservateurJoueur) Global.FENETRE.getPanel());
-		
-		Jeu jeu = new Jeu(monde);
+		Global.FENETRE.changePanel(Ecran.MENU);
+	
+		while(!Global.MODE_JEU) {}//on attends le menu
 		jeu.jouer();
 	
 		
