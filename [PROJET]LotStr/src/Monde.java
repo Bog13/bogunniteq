@@ -69,6 +69,27 @@ public class Monde implements ObservableMonde
 	
 	}
 	
+	public Position2D positionLibre()
+	{
+		Position2D position= null;
+		
+		do
+		{
+			position=Position2D.random();
+		}
+		while(getCase(position).getId() != '0' || !estDansMonde(position));
+		
+		return position;
+	}
+	
+	public void placerPiece(int nb)
+	{
+		for(int i=0;i<nb;i++)
+		{
+			getCase(positionLibre()).mettreItem( new PieceOr('$') );
+		}
+	}
+	
 	public void placerPnjs()
 	{
 		for(int i=1;i<=Global.NB_PNJS;i++)
@@ -98,12 +119,7 @@ public class Monde implements ObservableMonde
 		initPosition();
 		initMur();
 		
-		getCase(Position2D.position(2,2)).mettreItem( new PieceOr('$') ); ////DEBUG////
-		getCase(Position2D.position(2,3)).mettreItem( new PieceOr('$') ); ////DEBUG////
-		getCase(Position2D.position(2,4)).mettreItem( new PieceOr('$') ); ////DEBUG////
-		
-		placerPnjs();
-		getCase(Position2D.position(2,15)).mettreItem( new PieceOr('$') ); ////DEBUG////
+		placerPiece(Global.NB_PIECE);
 		
 		
 

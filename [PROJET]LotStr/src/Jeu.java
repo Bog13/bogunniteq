@@ -63,7 +63,7 @@ public class Jeu
 		m_gagne=true;
 		if(Global.MODE_GRAPHIQUE)
 		{
-			Global.FENETRE.changePanel(new Ecran.MenuPanel());
+			Global.FENETRE.changePanel(Ecran.WIN);
 		}
 		else
 		{
