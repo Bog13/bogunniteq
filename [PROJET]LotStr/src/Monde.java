@@ -21,6 +21,7 @@ public class Monde implements ObservableMonde
 
 	public Monde() 
 	{
+		Global.MONDE=this;
 		m_alObs=new ArrayList<ObservateurMonde>();
 		m_monde = new Case[Global.NB_CASE_HAUTEUR][Global.NB_CASE_LARGEUR];
 
@@ -454,6 +455,7 @@ public class Monde implements ObservableMonde
 		updateObs();
 		updatePrendreOr();
 		m_joueur.update();
+		
 	}
 	
 	

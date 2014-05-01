@@ -50,7 +50,6 @@ public class Jeu
 			///JOUEURS
 			m_alive= m_monde.getPerso(numPerso).jouer();
 	
-			
 		}
 	}
 	
@@ -84,6 +83,7 @@ public class Jeu
 			System.out.println("Tu as perdu...");
 		}
 	}
+	
 	
 	public void update()
 	{

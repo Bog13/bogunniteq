@@ -44,4 +44,8 @@ public class Global
 	public static boolean ringFound=false;
 	public static boolean keyPressed=false;
 	
+	public static Monde MONDE=null;
+	
+	public static boolean MODE_JEU=false;
+	
 }

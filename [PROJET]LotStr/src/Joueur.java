@@ -152,7 +152,7 @@ public class Joueur extends Perso implements ObservableJoueur
 	{
 		for(ObservateurJoueur obs: al_obs)
 		{
-			obs.update(m_vie,m_or);
+			obs.update(m_vie,m_atk,m_def,m_or);
 		}
 		
 	}
