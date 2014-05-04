@@ -90,12 +90,28 @@ public class Monde implements ObservableMonde
 		m_monde[i][j]=new Anneau('A');
 	}
 	
+	public void placerPotion(int nb)
+	{
+		for(int i=0;i<nb;i++)
+		{
+			getCase(positionLibre()).mettreItem( new Potion(2) );
+		}
+	}
+	
 	public void placerPiece(int nb)
 	{
 		for(int i=0;i<nb;i++)
 		{
 			getCase(positionLibre()).mettreItem( new PieceOr('$') );
 		}
+	}
+	
+	public void placerItem()
+	{
+		placerPotion(Global.NB_POTION_VIE);
+		placerPiece(Global.NB_PIECE);
+		
+		placerAnneau();
 	}
 	
 	public void placerPnj()
@@ -125,12 +141,12 @@ public class Monde implements ObservableMonde
 	public void Init()
 	{
 		initMur();
-		placerAnneau();
+		placerItem();
 		initPosition();
 		
-		placerPiece(Global.NB_PIECE);
 		placerPnj();
 		
+		m_monde[2][2].mettreItem(new Potion(2));
 		
 		
 
@@ -496,6 +512,7 @@ public class Monde implements ObservableMonde
 		updateObs();
 		updatePrendreOr();
 		updatePerso();
+		m_joueur.getInventaire().listerNom();
 		
 	}
 	
@@ -731,7 +748,7 @@ public class Monde implements ObservableMonde
 		{
 			for ( int j = 0; j < Global.NB_CASE_LARGEUR; j++ )
 			{
-				this.getCase(new Position2D(i, j)).setVisible(false);
+				this.getCase(new Position2D(i, j)).setVisible(true);//DEBUG
 				
 			}
 		}

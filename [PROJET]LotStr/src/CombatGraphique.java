@@ -12,6 +12,11 @@ public class CombatGraphique implements Combat_TypeCombat
 	public void setTouche(int t)
 	{
 		m_touche=t;
+		
+	}
+	
+	public void reinitTouche()
+	{
 		m_touche=NONE;
 	}
 	

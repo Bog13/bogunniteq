@@ -41,6 +41,7 @@ public class Global
 	final public static int KEY_NONE=-1;
 	
 	final public static int VALEUR_OR=10;
+    final public static int	NB_POTION_VIE= 5;
 	
 	public static boolean ringFound=false;
 	public static boolean keyPressed=false;

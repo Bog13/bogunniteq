@@ -32,7 +32,7 @@ public class Combat implements ObservableCombat
 	{
 		try
 		{
-			Thread.sleep(2000);
+			Thread.sleep(500);
 		}
 		catch ( InterruptedException e )
 		{
@@ -51,7 +51,7 @@ public class Combat implements ObservableCombat
 			switch(choixAction())
 			{
 				case ATTAQUER:
-					attaquer();
+					attaquer(m_agresseur, m_victime);
 					
 					break;
 					
@@ -59,14 +59,18 @@ public class Combat implements ObservableCombat
 					fuir();
 					break;
 			}
+			
+			update();
+			attaquer(m_victime, m_agresseur);
 		
+			pause();
 		}
 		
 		if(m_gagnant != null)m_message="Victoire de "+m_gagnant.getNom()+" !";
 		else m_message="Pas de gagnant...";
 		
 		update();
-		pause();
+		//pause();
 		Ecran.PASSER_MODE_JEU();
 		return m_gagnant;
 	}
@@ -90,25 +94,32 @@ public class Combat implements ObservableCombat
 		return (CombatGraphique) m_typeCombat;
 	}
 
-
-	public void attaquer()
+	public void reinitTouche()
 	{
-		m_message=m_agresseur.getNom()+"attaque "+m_victime.getNom()+" !";
+		if(Global.MODE_GRAPHIQUE)
+		{
+			((CombatGraphique) m_typeCombat).reinitTouche();
+		}
+	}
+
+	public void attaquer(Perso agresseur, Perso victime)
+	{
+		reinitTouche();
+		m_message=agresseur.getNom()+" attaque "+victime.getNom()+" !";
 		
-		if 	((m_agresseur.getAtk() - m_victime.getDef()) > 0)
+		if 	((agresseur.getAtk() - victime.getDef()) > 0)
 		{
 			Outil.debugMsg("CAS 1");
-			m_victime.takeDamage( m_agresseur.getAtk() - m_victime.getDef() );	
+			victime.takeDamage( agresseur.getAtk() - victime.getDef() );	
 		}
 		else 
 		{
-			m_victime.takeDamage(1);
+			victime.takeDamage(1);
 		}
 		
-		if(m_agresseur.estMort())m_gagnant=m_victime;
-		else if(m_victime.estMort())m_gagnant=m_agresseur;
+		if(agresseur.estMort())m_gagnant=victime;
+		else if(victime.estMort())m_gagnant=agresseur;
 		
-	
 	}
 
 	public void fuir() 

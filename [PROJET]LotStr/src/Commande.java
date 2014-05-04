@@ -25,4 +25,8 @@ public class Commande
 	{
 		m_joueur.move(0,1);
 	}
+	public void prendre()
+	{
+		m_joueur.prendreItemCase();
+	}
 }
