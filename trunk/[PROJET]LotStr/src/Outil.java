@@ -82,7 +82,7 @@ public class Outil
 		Image img;
 		try
 		{
-			img = ImageIO.read(new File(path));
+			img = ImageIO.read(new File(Global.IMG_PATH+path));
 			return img;
 		}
 		catch ( IOException e )

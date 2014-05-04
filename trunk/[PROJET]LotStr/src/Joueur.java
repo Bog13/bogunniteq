@@ -32,7 +32,7 @@ public class Joueur extends Perso implements ObservableJoueur
 		m_inventaire=new Inventaire();
 		m_or=0;
 		m_vie = Global.VIE_JOUEUR ;
-		m_rendu='C';
+		m_look='C';
 		m_nom = Global.NOM_JOUEUR;
 		m_atk = Global.ATK_JOUEUR;
 		m_def = Global.DEF_JOUEUR;
@@ -107,6 +107,7 @@ public class Joueur extends Perso implements ObservableJoueur
 	
 	public void update()
 	{
+		super.update();
 		updateObs();
 	}
 	
