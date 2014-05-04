@@ -15,7 +15,7 @@ public class PotionDef extends Potion
 	
 	public void initVar()
 	{
-		
+		super.initVar();
 	}
 	
 	public PotionDef(char look)

@@ -9,12 +9,27 @@ public abstract class Perso
 	protected char m_look;
 	protected Monde m_monde;
 	private boolean m_vivant;
-	
+	protected Arme m_arme;
 	
 	
 	public int getVie()
 	{
 		return m_vie;
+	}
+	
+	public void setArme(Arme arme)
+	{
+		m_arme=arme;
+	}
+	
+	public Arme getArme()
+	{
+		return m_arme;
+	}
+	
+	public boolean hasArme()
+	{
+		return (m_arme != null);
 	}
 	
 	public void kill()
@@ -73,6 +88,7 @@ public abstract class Perso
 	
 	public void init(Monde monde)
 	{
+		m_arme=null;
 		m_monde=monde;
 		m_nom="";
 		m_position = new Position2D();

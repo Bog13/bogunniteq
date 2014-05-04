@@ -9,6 +9,7 @@ public class Item
 	protected Perso m_owner;
 	protected String m_description;
 	protected String m_nom;
+	protected int m_poid;
 	
 	public Item()
 	{
@@ -24,10 +25,16 @@ public class Item
 	
 	public void init(char look)
 	{
+		m_poid=0;
 		m_nom="item";
 		m_look=look;
 		m_owner=null;
 		m_description="aucune description";
+	}
+	
+	public int getPoid()
+	{
+		return m_poid;
 	}
 	
 	public String getNom()

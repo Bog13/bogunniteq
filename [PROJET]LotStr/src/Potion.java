@@ -16,6 +16,7 @@ public abstract class Potion extends Item
 	public void initVar()
 	{
 		m_puissance=2;
+		m_poid=Global.POTION_POID;
 	}
 	
 	public Potion(char look)
