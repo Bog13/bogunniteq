@@ -11,6 +11,7 @@ public class Joueur extends Perso implements ObservableJoueur
 	private String m_saisie=new String();
 	private Joueur_TypeJeu m_typeJeu;
 	private ArrayList<ObservateurJoueur> al_obs=null;
+
 	
 	public void initTypeJeu()
 	{
@@ -26,6 +27,7 @@ public class Joueur extends Perso implements ObservableJoueur
 	
 	public void init()
 	{
+		m_arme=null;
 		al_obs= new ArrayList<ObservateurJoueur>();
 				
 		initTypeJeu();
@@ -71,11 +73,16 @@ public class Joueur extends Perso implements ObservableJoueur
 	 */
 	public boolean prendreItemCase()
 	{
-		if(!getCase().hasItem() )
+		if(!getCase().hasItem())
 		{
 			return false;
 		}
-
+		
+		if(getCase().getItem().getPoid() + m_inventaire.getPoid() > Global.MAX_INVENTAIRE)
+		{
+			return false;
+		}
+		
 		prendreItem( getCase().getItem());
 		
 		getCase().retirerItem();
@@ -112,6 +119,8 @@ public class Joueur extends Perso implements ObservableJoueur
 		super.update();
 		updateObs();
 	}
+	
+	
 	
 	
 	public Inventaire getInventaire()

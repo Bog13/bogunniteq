@@ -130,13 +130,53 @@ public class Monde implements ObservableMonde
 		}
 	}
 	
+	public void placerEpee(int nb)
+	{
+		for(int i=0;i<nb;i++)
+		{
+			getCase(positionLibre()).mettreItem( new Epee() );
+		}
+	}
+	
+	public void placerSabre(int nb)
+	{
+		for(int i=0;i<nb;i++)
+		{
+			getCase(positionLibre()).mettreItem( new Sabre() );
+		}
+	}
+	
+	public void placerDagger(int nb)
+	{
+		for(int i=0;i<nb;i++)
+		{
+			getCase(positionLibre()).mettreItem( new Dagger() );
+		}
+	}
+	
+	public void placerDarkness(int nb)
+	{
+		for(int i=0;i<nb;i++)
+		{
+			getCase(positionLibre()).mettreItem( new Darkness() );
+		}
+	}
+	
+	public void placerArme()
+	{
+		placerEpee(4);
+		placerSabre(4);
+		placerDarkness(4);
+		placerDagger(4);
+	}
+	
 	public void placerPotion()
 	{
 		placerPotionVie(Global.NB_POTION_VIE);
 		placerPotionDef(Global.NB_POTION_DEF);
 		placerPotionAtk(Global.NB_POTION_ATK);
 		placerPotionGold(Global.NB_POTION_GOLD);
-		
+		placerArme();
 	}
 	
 	public void placerItem()

@@ -15,7 +15,7 @@ public class PotionGold extends Potion
 	
 	public void initVar()
 	{
-		
+		super.initVar();
 	}
 	
 	public PotionGold(char look)

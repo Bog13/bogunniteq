@@ -15,7 +15,7 @@ public class PotionAtk extends Potion
 	
 	public void initVar()
 	{
-		
+		super.initVar();
 	}
 	
 	public PotionAtk(char look)

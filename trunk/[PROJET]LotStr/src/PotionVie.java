@@ -15,7 +15,7 @@ public class PotionVie extends Potion
 	
 	public void initVar()
 	{
-		
+		super.initVar();
 	}
 	
 	public PotionVie(char look)

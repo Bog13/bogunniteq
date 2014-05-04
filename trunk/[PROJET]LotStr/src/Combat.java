@@ -19,6 +19,8 @@ public class Combat implements ObservableCombat
 		this.addObs((ObservateurCombat) Ecran.COMBAT);
 		Global.MODE_COMBAT=true;
 		m_message=("Un combat commence ! "+agresseur.getNom()+" attaque "+victime.getNom());
+		
+		
 		m_continuer = true;
 		m_agresseur = agresseur;
 		m_victime = victime;
@@ -26,13 +28,14 @@ public class Combat implements ObservableCombat
 		
 		if(Global.MODE_GRAPHIQUE)m_typeCombat=new CombatGraphique();
 		else m_typeCombat=new CombatConsole();
+		
 	}
 	
 	public void pause()
 	{
 		try
 		{
-			Thread.sleep(500);
+			Thread.sleep(1000);
 		}
 		catch ( InterruptedException e )
 		{
@@ -105,12 +108,22 @@ public class Combat implements ObservableCombat
 	public void attaquer(Perso agresseur, Perso victime)
 	{
 		reinitTouche();
-		m_message=agresseur.getNom()+" attaque "+victime.getNom()+" !";
+		
 		
 		if 	((agresseur.getAtk() - victime.getDef()) > 0)
 		{
-			Outil.debugMsg("CAS 1");
-			victime.takeDamage( agresseur.getAtk() - victime.getDef() );	
+			
+			if(agresseur.hasArme())
+			{
+				m_message=agresseur.getNom()+" attaque "+victime.getNom()+" avec " + agresseur.getArme().getNom()+" !";
+				victime.takeDamage( agresseur.getAtk()+agresseur.getArme().getAtk() - victime.getDef() );
+			}
+			
+			else
+			{
+				m_message=agresseur.getNom()+" attaque "+victime.getNom()+" !";
+				victime.takeDamage( agresseur.getAtk() - victime.getDef() );
+			}
 		}
 		else 
 		{
