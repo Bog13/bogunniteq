@@ -28,7 +28,7 @@ public class Pnj extends Perso
 	
 	public boolean jouer()
 	{
-		seBallader();
+		//seBallader();
 		return true;
 	}
 

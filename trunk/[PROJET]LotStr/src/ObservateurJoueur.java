@@ -1,5 +1,5 @@
 
 interface ObservateurJoueur 
 {
-	public void update(int vie,int atk,int def,int or);
+	public void update(Inventaire inventaire,int vie,int atk,int def,int or);
 }

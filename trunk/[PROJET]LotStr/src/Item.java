@@ -5,8 +5,10 @@
 
 public class Item 
 {
-	private char m_look;
-	private Perso m_owner;
+	protected char m_look;
+	protected Perso m_owner;
+	protected String m_description;
+	protected String m_nom;
 	
 	public Item()
 	{
@@ -22,8 +24,25 @@ public class Item
 	
 	public void init(char look)
 	{
+		m_nom="item";
 		m_look=look;
 		m_owner=null;
+		m_description="aucune description";
+	}
+	
+	public String getNom()
+	{
+		return m_nom;
+	}
+	
+	public void setDescription(String description)
+	{
+		m_description=description;
+	}
+	
+	public String getDescription()
+	{
+		return m_description;
 	}
 	
 	public void ramasser(Perso perso)
