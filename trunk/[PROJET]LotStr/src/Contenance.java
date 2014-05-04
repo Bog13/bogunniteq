@@ -10,5 +10,10 @@ public class Contenance
 		m_quantite=nb;
 	}
 	
+	public void addOnce()
+	{
+		m_quantite++;
+	}
+	
 	
 }
