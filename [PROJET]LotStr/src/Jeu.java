@@ -10,6 +10,7 @@ public class Jeu
 	private boolean m_alive;
 	private Vector<Perso> m_perso;
 	private Monde m_monde;
+	private Joueur m_joueur;
 	private int m_tour;
 	private boolean m_gagne;
 	
@@ -48,7 +49,14 @@ public class Jeu
 				}
 			}
 			///JOUEURS
-			m_alive= m_monde.getPerso(numPerso).jouer();
+			//m_alive= m_monde.getPerso(numPerso).jouer();
+			
+			for(int i=1;i<Global.NB_PNJS;i++)
+			{
+				m_monde.getPerso(i).jouer();
+			}
+			m_monde.getJoueur().jouer();
+			m_tour++;
 	
 		}
 	}
@@ -87,7 +95,7 @@ public class Jeu
 	
 	public void update()
 	{
-		m_tour++;
+		
 		m_monde.update();
 		
 		if(Global.ringFound)

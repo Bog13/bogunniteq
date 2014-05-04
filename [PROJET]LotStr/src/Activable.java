@@ -8,12 +8,17 @@ public abstract class Activable extends Case
 	protected boolean	m_on;
 	protected int		m_timer;
 
+
 	public Activable(char id)
 	{
 		super(id);
 		m_timer = -1;
 		m_on = false;
 	}
+	
+	
+	
+	
 
 	public void activer()
 	{

@@ -14,11 +14,11 @@ public class Monde implements ObservableMonde
 {
 	private Case[][]			m_monde;
 	private Joueur				m_joueur;
-	private Vector<Perso>		m_population;
+	private ArrayList<Perso>		m_population;
 	private Vector<Position2D>	m_positionLumineux;
 	private Vector<Position2D> m_positionActivable;
 	private ArrayList<ObservateurMonde> m_alObs;
-
+	
 	public Monde() 
 	{
 		Global.MONDE=this;
@@ -26,7 +26,7 @@ public class Monde implements ObservableMonde
 		m_monde = new Case[Global.NB_CASE_HAUTEUR][Global.NB_CASE_LARGEUR];
 
 		m_joueur = new Joueur(this, new Position2D(0, 0));
-		m_population = new Vector<Perso>();
+		m_population = new ArrayList<Perso>();
 		m_population.add(m_joueur);
 
 		m_positionLumineux = new Vector<Position2D>();
@@ -82,6 +82,14 @@ public class Monde implements ObservableMonde
 		return position;
 	}
 	
+	public void placerAnneau()
+	{
+		Position2D posLibre=positionLibre();
+		int i=posLibre.getL();
+		int j=posLibre.getC();
+		m_monde[i][j]=new Anneau('A');
+	}
+	
 	public void placerPiece(int nb)
 	{
 		for(int i=0;i<nb;i++)
@@ -90,12 +98,14 @@ public class Monde implements ObservableMonde
 		}
 	}
 	
-	public void placerPnjs()
+	public void placerPnj()
 	{
 		for(int i=1;i<=Global.NB_PNJS;i++)
 		{
 			// à modifier de sorte que différents types de monstres soient générés
-			//m_population.add(new MonstreAgr(this,posHasard()));
+			Pnj pnj=new Pnj(this);
+			pnj.setPosition( positionLibre() );
+			m_population.add(pnj);
 		}
 	}
 	
@@ -114,12 +124,13 @@ public class Monde implements ObservableMonde
 	
 	public void Init()
 	{
-		m_monde[3][2] = new Anneau('A');
-		
-		initPosition();
 		initMur();
+		placerAnneau();
+		initPosition();
 		
 		placerPiece(Global.NB_PIECE);
+		placerPnj();
+		
 		
 		
 
@@ -305,7 +316,7 @@ public class Monde implements ObservableMonde
 
 		while (i < m_population.size() && !resultat)
 		{
-			if ( m_population.get(i).getPosition().estEgal(pos) )
+			if ( m_population.get(i).estVivant() && m_population.get(i).getPosition().estEgal(pos) )
 			{
 				resultat = true;
 			}
@@ -383,7 +394,17 @@ public class Monde implements ObservableMonde
 
 	public Perso getPerso( int i )
 	{
-		return m_population.get(i);
+		Perso perso=null;
+		try
+		{
+			perso=m_population.get(i);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		return perso;
 	}
 
 	public int getNbPerso()
@@ -427,10 +448,12 @@ public class Monde implements ObservableMonde
 		{
 			for ( int j = 0; j < Global.NB_CASE_LARGEUR; j++ )
 			{
+				try {
 				actuel = contenu.charAt(j + i * (Global.NB_CASE_LARGEUR +1)); // Pourquoi
 																	// +1
 																				// ?
 																				// :o
+				}catch(Exception e) {Outil.debugMsg("ICI");e.printStackTrace();actuel='0';}
 
 				switch ( actuel )
 				{
@@ -461,6 +484,8 @@ public class Monde implements ObservableMonde
 	 */
 	public void update()
 	{
+		if(Global.ringFound) {Outil.debugMsg("OK");}
+		
 		updateActivationActivable();
 		updateActivable();
 		updateLumineux();
@@ -470,7 +495,7 @@ public class Monde implements ObservableMonde
 		updateVisibleAutour();
 		updateObs();
 		updatePrendreOr();
-		m_joueur.update();
+		updatePerso();
 		
 	}
 	
@@ -480,10 +505,58 @@ public class Monde implements ObservableMonde
 	// /********** UPDATE **********///
 	// ////////////////////////////////
 	
+	public ArrayList<Perso> listePnjPosition(Position2D pos)
+	{
+		ArrayList<Perso> al_perso= new ArrayList<Perso>();
+		for(Perso pop :m_population)
+		{
+			
+			if(pop != m_joueur && pop.getPosition().estEgal(pos) && pop.estVivant())
+			{
+				al_perso.add(pop);
+			}
+			
+		}
+		
+		return al_perso;
+	}
+	
+	public void updatePerso()
+	{
+		for(Perso pop :m_population)
+		{
+			
+			pop.update();
+			
+		}
+	}
+	
 	public void updateCombat()
 	{
-		//if () 
+		ArrayList<Perso> posListe=listePnjPosition(m_joueur.getPosition());
 		
+		if(posListe.size() > 0)
+		{
+			Global.MODE_COMBAT=true;
+			//kill(posListe.get(0));
+			Combat combat=null;
+			for(Perso opposant:posListe)
+			{
+				
+				combat=new Combat(m_joueur,opposant);
+				if(Global.MODE_GRAPHIQUE)Ecran.PASSER_MODE_COMBAT(combat);
+				Perso gagnant=combat.fight();
+				
+				if(gagnant==m_joueur) kill(opposant);
+				else if (gagnant==opposant) kill(m_joueur);
+				
+			}
+		}
+	}
+	
+	public void kill(Perso perso)
+	{
+		perso.kill();
 	}
 	
 	public void updatePrendreOr()
@@ -504,8 +577,9 @@ public class Monde implements ObservableMonde
 	{
 		Position2D parcours;
 		// joueur
-		this.setCaseVisibleAutour(m_population.get(m_population.size() - 1)
-				.getPosition(), Global.JOUEUR_RAYON);
+		/*this.setCaseVisibleAutour(m_population.get(m_population.size() - 1)
+				.getPosition(), Global.JOUEUR_RAYON);*/
+		this.setCaseVisibleAutour(m_joueur.getPosition(), Global.JOUEUR_RAYON);
 	
 		// torche
 		for ( int i = 0; i < m_positionLumineux.size(); i++ )
@@ -539,7 +613,7 @@ public class Monde implements ObservableMonde
 				)
 				{
 					
-					/*DEBUG*/
+					
 					estVisible=true;
 					
 					
@@ -550,7 +624,7 @@ public class Monde implements ObservableMonde
 					
 					
 					
-					/*FIN DEBUG*/
+				
 					
 					this.getCase(parcours).setVisible(estVisible);
 					
@@ -594,7 +668,7 @@ public class Monde implements ObservableMonde
 	{
 		for ( Position2D pos: m_positionActivable)
 		{
-			if ( this.existePersoPosition(pos) )
+			if ( this.existePersoPosition(pos))
 			{
 				
 				switch(getCase(pos).getId())
@@ -602,7 +676,10 @@ public class Monde implements ObservableMonde
 					case 'P':
 						((Activable) this.getCase(pos)).activer(1);
 						break;
-					
+						
+					case 'A':
+						if ( getPersoPosition(pos)==m_joueur ) {((Activable) this.getCase(pos)).activer();}
+						break;
 						
 					default:
 						((Activable) this.getCase(pos)).activer(3);
@@ -744,7 +821,7 @@ public class Monde implements ObservableMonde
 				{
 					if(existePersoPosition(Position2D.position(i,j)))
 					{
-						charTab[i][j]='C';
+						charTab[i][j]=getPersoPosition(Position2D.position(i,j)).getLook();
 					}
 					else
 					{

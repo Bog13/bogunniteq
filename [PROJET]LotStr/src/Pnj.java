@@ -4,9 +4,9 @@ public class Pnj extends Perso
 	public Pnj (Monde monde)
 	{
 		super(monde);
-		m_vie = 4;
-		m_rendu = 'W';
-		m_nom = "???";
+		m_vie = 18;
+		m_look = 'W';
+		m_nom = "un monstre";
 		m_atk = 3;
 		m_def = 1;
 		
@@ -18,9 +18,17 @@ public class Pnj extends Perso
 		m_position=pos;
 	}
 	
+	public void seBallader()
+	{
+		int x=Outil.hasard(-2,2);
+		int y=Outil.hasard(-2,2);
+	
+		move(x,y);
+	}
+	
 	public boolean jouer()
 	{
-		System.out.println(m_nom + " a joué");
+		seBallader();
 		return true;
 	}
 

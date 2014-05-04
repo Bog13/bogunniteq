@@ -6,23 +6,28 @@ public class Anneau extends Activable
 	public Anneau(char id)
 	{
 		super(id);
-	
+		m_look='O';
 	}
 
 	
-
+	public void activer()
+	{
+		super.activer();
+		Global.ringFound=true;
+	}
 	
 	public void update()
 	{
 		super.update();
-		if(!m_on)
+		
+		/*if(!m_on)
 		{
 			m_look='O';
 		}
 		else
 		{
 			Global.ringFound=true;
-		}
+		}*/
 	}
 	
 	

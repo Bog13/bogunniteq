@@ -20,17 +20,17 @@ public class Global
 	
 	
 	final public static Ecran.Fenetre FENETRE = new Ecran.Fenetre();
-	
-	final public static int TORCHE_RAYON=8;
-	final public static int TORCHE_DUREE=20;
-	final public static int JOUEUR_RAYON=6;
+	final public static int NB_PNJS = 10;
+	final public static int TORCHE_RAYON=16;
+	final public static int TORCHE_DUREE=NB_CASE_LARGEUR*2;
+	final public static int JOUEUR_RAYON=4;
 	
 	final public static int VIE_JOUEUR = 10;
 	final public static String NOM_JOUEUR = "Zdow-Wah";
 	final public static int ATK_JOUEUR = 5;
 	final public static int DEF_JOUEUR = 2;
-	
-	final public static int NB_PNJS = 3;
+	final public static String IMG_PATH="img/";
+
 	final public static int NB_PIECE = 10;
 	
 	final public static int KEY_HAUT=0;
@@ -48,5 +48,6 @@ public class Global
 	public static Monde MONDE=null;
 	
 	public static boolean MODE_JEU=false;
+	public static boolean MODE_COMBAT=false;
 	
 }
