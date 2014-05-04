@@ -29,7 +29,7 @@ public class Joueur extends Perso implements ObservableJoueur
 		al_obs= new ArrayList<ObservateurJoueur>();
 				
 		initTypeJeu();
-		m_inventaire=new Inventaire();
+		m_inventaire=new Inventaire(this);
 		m_or=0;
 		m_vie = Global.VIE_JOUEUR ;
 		m_look='C';
@@ -43,6 +43,8 @@ public class Joueur extends Perso implements ObservableJoueur
 		init();
 		
 	}
+	
+	public void earnGold(int or) {m_or+=or;}
 	
 	public void prendreItem(Item it)
 	{

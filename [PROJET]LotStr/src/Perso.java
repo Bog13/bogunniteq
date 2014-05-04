@@ -56,9 +56,19 @@ public abstract class Perso
 		return m_atk;
 	}
 	
+	public void setAtk(int atk)
+	{
+		m_atk=atk;
+	}
+	
 	public int getDef()
 	{
 		return m_def;
+	}
+	
+	public void setDef(int def)
+	{
+		m_def=def;
 	}
 	
 	public void init(Monde monde)

@@ -41,7 +41,20 @@ public class Global
 	final public static int KEY_NONE=-1;
 	
 	final public static int VALEUR_OR=10;
-    final public static int	NB_POTION_VIE= 5;
+    
+	
+	
+	final public static int	NB_POTION_VIE= 5;
+	public static final int	NB_POTION_DEF	= 3;
+	public static final int	NB_POTION_ATK	= 2;
+	public static final int	NB_POTION_GOLD	= 1;
+	
+	public static final int	POTION_VIE	= 20;
+	public static final int	POTION_DEF	= 5;
+	public static final int	POTION_ATK	= 2;
+	public static final int	POTION_GOLD	= 200;
+	
+	
 	
 	public static boolean ringFound=false;
 	public static boolean keyPressed=false;

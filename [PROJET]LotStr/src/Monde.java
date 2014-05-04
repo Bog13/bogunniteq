@@ -90,11 +90,35 @@ public class Monde implements ObservableMonde
 		m_monde[i][j]=new Anneau('A');
 	}
 	
-	public void placerPotion(int nb)
+	public void placerPotionVie(int nb)
 	{
 		for(int i=0;i<nb;i++)
 		{
-			getCase(positionLibre()).mettreItem( new Potion(2) );
+			getCase(positionLibre()).mettreItem( new PotionVie(Global.POTION_VIE) );
+		}
+	}
+	
+	public void placerPotionDef(int nb)
+	{
+		for(int i=0;i<nb;i++)
+		{
+			getCase(positionLibre()).mettreItem( new PotionDef(Global.POTION_DEF) );
+		}
+	}
+	
+	public void placerPotionAtk(int nb)
+	{
+		for(int i=0;i<nb;i++)
+		{
+			getCase(positionLibre()).mettreItem( new PotionAtk(Global.POTION_ATK) );
+		}
+	}
+	
+	public void placerPotionGold(int nb)
+	{
+		for(int i=0;i<nb;i++)
+		{
+			getCase(positionLibre()).mettreItem( new PotionGold(Global.POTION_GOLD) );
 		}
 	}
 	
@@ -106,9 +130,18 @@ public class Monde implements ObservableMonde
 		}
 	}
 	
+	public void placerPotion()
+	{
+		placerPotionVie(Global.NB_POTION_VIE);
+		placerPotionDef(Global.NB_POTION_DEF);
+		placerPotionAtk(Global.NB_POTION_ATK);
+		placerPotionGold(Global.NB_POTION_GOLD);
+		
+	}
+	
 	public void placerItem()
 	{
-		placerPotion(Global.NB_POTION_VIE);
+		placerPotion();
 		placerPiece(Global.NB_PIECE);
 		
 		placerAnneau();
@@ -146,9 +179,7 @@ public class Monde implements ObservableMonde
 		
 		placerPnj();
 		
-		m_monde[2][2].mettreItem(new Potion(2));
-		
-		
+
 
 	}
 	

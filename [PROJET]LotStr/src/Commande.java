@@ -29,4 +29,5 @@ public class Commande
 	{
 		m_joueur.prendreItemCase();
 	}
+	
 }

@@ -1,7 +1,6 @@
 
-public class Potion extends Item
+public abstract class Potion extends Item
 {
-	
 	private int m_puissance;
 	
 	public Potion(int p)
@@ -9,7 +8,7 @@ public class Potion extends Item
 		super('p');
 		m_puissance =p;
 		m_look='p';
-		m_nom="Potion de Santé";
+		m_nom="Potion de Santé n°";
 		m_description="Une potion aux effets inconnus";
 		initVar();
 	}
@@ -25,10 +24,10 @@ public class Potion extends Item
 		initVar();
 	}
 	
-	public void use()
-	{
-		m_owner.setVie(m_owner.getVie()+m_puissance);
-	}
+	public abstract void use();
+	
+		//m_owner.setVie(m_owner.getVie()+m_puissance);
+	
 	
 	
 	
