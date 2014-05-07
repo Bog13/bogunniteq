@@ -77,9 +77,9 @@ public class Combat implements ObservableCombat
 		if(m_gagnant != null && m_gagnant==Global.MONDE.getJoueur())
 		{
 			Outil.debugMsg("1");
-			Item loot=new Dagger();
-			if(m_gagnant==m_agresseur)((Pnj) m_victime).loot(loot);
-			else ((Pnj) m_agresseur).loot(loot);
+			Item loot=Outil.hasardItem();
+			if(m_gagnant==m_agresseur)((Pnj) m_victime).loot();
+			else ((Pnj) m_agresseur).loot();
 		}
 		
 		update();

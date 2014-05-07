@@ -24,7 +24,7 @@ public class LotStr
 	
 	public static void main (String[] args) 
 	{
-		
+		for(int i=0;i<100;i++) {Outil.hasardItem();}
 		Monde monde=new Monde();
 		Jeu jeu = new Jeu(monde);
 		

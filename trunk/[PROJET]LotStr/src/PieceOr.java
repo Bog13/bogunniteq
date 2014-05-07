@@ -4,7 +4,7 @@ public class PieceOr extends Item
 	
 	public PieceOr()
 	{
-		super('i');
+		super('$');
 	}
 	
 	public PieceOr(char look)

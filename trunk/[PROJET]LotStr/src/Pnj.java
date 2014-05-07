@@ -35,9 +35,9 @@ public class Pnj extends Perso
 		return true;
 	}
 	
-	public void loot(Item it)
+	public void loot()
 	{
-		m_monde.getCase(getPosition()).mettreItem(it);
+		m_monde.getCase(getPosition()).mettreItem(Outil.hasardItem());
 	}
 
 	

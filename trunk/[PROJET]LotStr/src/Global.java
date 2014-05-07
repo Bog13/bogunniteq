@@ -72,6 +72,16 @@ public class Global
 	public static final int	DAGUE_PRIX	= 60;
 	public static final int	EPEE_PRIX	= 70;
 	public static final int	SABRE_PRIX	= 90;
+	public static final int	PROBA_POTION_VIE	= 10;
+	public static final int	PROBA_POTION_DEF	= 10;
+	public static final int	PROBA_POTION_ATK	= 10;
+	public static final int	PROBA_EPEE	= 5;
+	public static final int	PROBA_POTION_GOLD	= 10;
+	public static final int	PROBA_DAGGER	= 10;
+	public static final int	PROBA_SABRE	= 2;
+	public static final int	PROBA_OR	= 43;
+	
+	
 	
 	
 	
