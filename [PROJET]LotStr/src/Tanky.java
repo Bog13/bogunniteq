@@ -3,7 +3,7 @@ public class Tanky extends Pnj
 	public Tanky (Monde monde)
 	{
 		super(monde);
-		m_vie = 200;
+		m_vie = 1;
 		m_look = 'W';
 		m_nom = "Tanky";
 		m_atk = 3;

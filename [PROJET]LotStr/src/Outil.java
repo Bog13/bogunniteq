@@ -77,6 +77,48 @@ public class Outil
 		return ((int)(Math.random()*(b-a) +a ));
 	}
 	
+	public static Item hasardItem()
+	{
+		int hasard=hasard(0,100);
+		Item it=null;
+		int proba=0;
+		
+		if(hasard>=0 && hasard <10)
+		{
+			it=new PotionVie();
+		}
+		else if(hasard>=10 && hasard <20)
+		{
+			it=new PotionDef();
+		}
+		else if(hasard>=20 && hasard <30)
+		{
+			it=new PotionAtk();
+		}
+		else if(hasard>=30 && hasard <40)
+		{
+			it=new PotionGold();
+		}
+		else if(hasard>=40 && hasard <50)
+		{
+			it=new Dagger();
+		}
+		else if(hasard>=50 && hasard <60)
+		{
+			it=new Epee();
+		}
+		else if(hasard>=60 && hasard <70)
+		{
+			it=new Sabre();
+		}
+		else if(hasard>=70 && hasard <100)
+		{
+			it=new PieceOr();
+		}
+		
+		return it;
+	}
+	
 	public static Image loadImage(String path)
 	{
 		Image img;

@@ -3,7 +3,7 @@ public class Tableax extends Pnj
 	public Tableax (Monde monde)
 	{
 		super(monde);
-		m_vie = 500;
+		m_vie = 1;
 		m_look = 'l';
 		m_nom = "Tableax";
 		m_atk = 50;
@@ -27,12 +27,15 @@ public class Tableax extends Pnj
 	
 	public boolean jouer()
 	{
-		//seBallader();
+		seBallader();
 		return true;
 	}
 
 	
-	
+	public void loot()
+	{
+		m_monde.getCase(getPosition()).mettreItem(new Darkness());
+	}
 	
 	
 }
