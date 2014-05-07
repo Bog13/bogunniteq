@@ -3,14 +3,18 @@ public class PotionGold extends Potion
 {
 	private int m_puissance;
 	
-	public PotionGold(int p)
+	public PotionGold()
 	{
 		super('p');
-		m_puissance =p;
+		m_puissance =Global.POTION_GOLD;
 		m_look='g';
 		m_nom="Potion d'Argent";
-		m_description="Une potion d'argent";
 		initVar();
+	}
+	
+	public static String describe()
+	{
+		return "Une potion d'argent";
 	}
 	
 	public void initVar()

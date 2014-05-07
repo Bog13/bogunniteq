@@ -15,9 +15,13 @@ public class Sabre extends Arme
 	public void initVar()
 	{
 		m_nom="Sabre";
-		m_description="Sabre royal.";
 		m_degat=5;
 		m_poid=10;
+	}
+	
+	public static String describe()
+	{
+		return "Un sabre.";
 	}
 	
 	public int getAtk()

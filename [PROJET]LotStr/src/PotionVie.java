@@ -3,14 +3,18 @@ public class PotionVie extends Potion
 {
 	private int m_puissance;
 	
-	public PotionVie(int p)
+	public PotionVie()
 	{
 		super('p');
-		m_puissance =p;
+		m_puissance =Global.POTION_VIE;
 		m_look='v';
 		m_nom="Potion de Santé";
-		m_description="Une potion de vie";
 		initVar();
+	}
+	
+	public static String describe()
+	{
+		return "Une potion de vie";
 	}
 	
 	public void initVar()

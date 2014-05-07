@@ -47,7 +47,8 @@ public class Joueur extends Perso implements ObservableJoueur
 	}
 	
 	public void earnGold(int or) {m_or+=or;}
-	
+	public void loseGold(int or) {m_or-=or;}
+	public int getGold() {return m_or;}
 	public void prendreItem(Item it)
 	{
 		if( it instanceof PieceOr)

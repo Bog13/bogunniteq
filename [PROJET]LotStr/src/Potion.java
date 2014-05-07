@@ -9,7 +9,7 @@ public abstract class Potion extends Item
 		m_puissance =p;
 		m_look='p';
 		m_nom="Potion de Santé n°";
-		m_description="Une potion aux effets inconnus";
+	
 		initVar();
 	}
 	
@@ -17,6 +17,11 @@ public abstract class Potion extends Item
 	{
 		m_puissance=2;
 		m_poid=Global.POTION_POID;
+	}
+	
+	public static String describe()
+	{
+		return "Potion.";
 	}
 	
 	public Potion(char look)

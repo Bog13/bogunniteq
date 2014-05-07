@@ -3,14 +3,19 @@ public class PotionAtk extends Potion
 {
 	private int m_puissance;
 	
-	public PotionAtk(int p)
+	public PotionAtk()
 	{
 		super('p');
-		m_puissance =p;
+		m_puissance =Global.POTION_ATK;
 		m_look='a';
 		m_nom="Potion d'Attaque";
-		m_description="Une potion d'attaque";
+		
 		initVar();
+	}
+	
+	public static String describe()
+	{
+		return "Une potion d'attaque";
 	}
 	
 	public void initVar()

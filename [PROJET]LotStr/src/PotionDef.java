@@ -3,14 +3,18 @@ public class PotionDef extends Potion
 {
 	private int m_puissance;
 	
-	public PotionDef(int p)
+	public PotionDef()
 	{
 		super('p');
-		m_puissance =p;
+		m_puissance =Global.POTION_DEF;
 		m_look='d';
 		m_nom="Potion de Défense";
-		m_description="Une potion de défense";
 		initVar();
+	}
+	
+	public static String describe()
+	{
+		return "Une potion de defense";
 	}
 	
 	public void initVar()

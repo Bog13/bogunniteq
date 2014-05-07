@@ -15,9 +15,13 @@ public class Dagger extends Arme
 	public void initVar()
 	{
 		m_nom="Dague";
-		m_description="Petite lame.";
 		m_degat=5;
 		m_poid=10;
+	}
+	
+	public static String describe()
+	{
+		return "Petite Lame";
 	}
 	
 	public int getAtk()

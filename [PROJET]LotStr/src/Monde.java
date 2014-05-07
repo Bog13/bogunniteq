@@ -82,6 +82,8 @@ public class Monde implements ObservableMonde
 		return position;
 	}
 	
+	
+	
 	public void placerAnneau()
 	{
 		Position2D posLibre=positionLibre();
@@ -94,7 +96,7 @@ public class Monde implements ObservableMonde
 	{
 		for(int i=0;i<nb;i++)
 		{
-			getCase(positionLibre()).mettreItem( new PotionVie(Global.POTION_VIE) );
+			getCase(positionLibre()).mettreItem( new PotionVie() );
 		}
 	}
 	
@@ -102,7 +104,7 @@ public class Monde implements ObservableMonde
 	{
 		for(int i=0;i<nb;i++)
 		{
-			getCase(positionLibre()).mettreItem( new PotionDef(Global.POTION_DEF) );
+			getCase(positionLibre()).mettreItem( new PotionDef() );
 		}
 	}
 	
@@ -110,7 +112,7 @@ public class Monde implements ObservableMonde
 	{
 		for(int i=0;i<nb;i++)
 		{
-			getCase(positionLibre()).mettreItem( new PotionAtk(Global.POTION_ATK) );
+			getCase(positionLibre()).mettreItem( new PotionAtk() );
 		}
 	}
 	
@@ -118,7 +120,7 @@ public class Monde implements ObservableMonde
 	{
 		for(int i=0;i<nb;i++)
 		{
-			getCase(positionLibre()).mettreItem( new PotionGold(Global.POTION_GOLD) );
+			getCase(positionLibre()).mettreItem( new PotionGold() );
 		}
 	}
 	
@@ -187,15 +189,42 @@ public class Monde implements ObservableMonde
 		placerAnneau();
 	}
 	
+
+	public void placerTanky()
+	{
+		for(int i=1;i<=Global.NB_TANKY;i++)
+		{
+			Pnj tanky=new Tanky(this);
+			tanky.setPosition( positionLibre() );
+			m_population.add(tanky);
+		}
+	}
+	
+	public void placerDepehess()
+	{
+		for(int i=1;i<=Global.NB_DEPEHESS;i++)
+		{
+			Pnj depehess=new Depehess(this);
+			depehess.setPosition( positionLibre() );
+			m_population.add(depehess);
+		}
+	}
+	
+	public void placerTableax()
+	{
+		for(int i=1;i<=Global.NB_TABLEAX;i++)
+		{
+			Pnj tableax=new Tableax(this);
+			tableax.setPosition( positionLibre() );
+			m_population.add(tableax);
+		}
+	}
+	
 	public void placerPnj()
 	{
-		for(int i=1;i<=Global.NB_PNJS;i++)
-		{
-			// à modifier de sorte que différents types de monstres soient générés
-			Pnj pnj=new Pnj(this);
-			pnj.setPosition( positionLibre() );
-			m_population.add(pnj);
-		}
+		placerTableax();
+		placerTanky();
+		placerDepehess();
 	}
 	
 	public Position2D posHasard()
@@ -213,6 +242,7 @@ public class Monde implements ObservableMonde
 	
 	public void Init()
 	{
+		m_monde[2][2]=new Vendeur('w');
 		initMur();
 		placerItem();
 		initPosition();
@@ -819,7 +849,7 @@ public class Monde implements ObservableMonde
 		{
 			for ( int j = 0; j < Global.NB_CASE_LARGEUR; j++ )
 			{
-				this.getCase(new Position2D(i, j)).setVisible(true);//DEBUG
+				this.getCase(new Position2D(i, j)).setVisible(true);//DEBUG_VISIBLE
 				
 			}
 		}
