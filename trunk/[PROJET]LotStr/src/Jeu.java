@@ -51,7 +51,7 @@ public class Jeu
 			///JOUEURS
 			//m_alive= m_monde.getPerso(numPerso).jouer();
 			
-			for(int i=1;i<Global.NB_PNJS;i++)
+			for(int i=1;i<Global.NB_PNJ;i++)
 			{
 				m_monde.getPerso(i).jouer();
 			}

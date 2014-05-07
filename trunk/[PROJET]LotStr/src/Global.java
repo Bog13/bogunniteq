@@ -20,7 +20,12 @@ public class Global
 	
 	
 	final public static Ecran.Fenetre FENETRE = new Ecran.Fenetre();
-	final public static int NB_PNJS = 10;
+	
+	public static final int	NB_TABLEAX = 1;
+	public static final int	NB_TANKY	= 10;
+	public static final int	NB_DEPEHESS	= 10;
+	public static final int	NB_PNJ	= NB_TANKY+NB_DEPEHESS+NB_TABLEAX;
+	
 	final public static int TORCHE_RAYON=16;
 	final public static int TORCHE_DUREE=NB_CASE_LARGEUR*2;
 	
@@ -60,6 +65,15 @@ public class Global
 	/**/
 	
 	public static final int	MAX_INVENTAIRE	= 100;
+	public static final int	POTION_VIE_PRIX	= 40;
+	public static final int	POTION_DEF_PRIX	= 20;
+	public static final int	POTION_ATK_PRIX	= 30;
+	public static final int	POTION_GOLD_PRIX= 201;
+	public static final int	DAGUE_PRIX	= 60;
+	public static final int	EPEE_PRIX	= 70;
+	public static final int	SABRE_PRIX	= 90;
+	
+	
 	
 	
 	
@@ -71,5 +85,6 @@ public class Global
 	
 	public static boolean MODE_JEU=false;
 	public static boolean MODE_COMBAT=false;
+	public static boolean MODE_ACHAT=false;
 	
 }

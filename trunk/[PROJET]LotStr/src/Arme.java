@@ -23,9 +23,14 @@ public abstract class Arme extends Item
 	public void initVar()
 	{
 		m_nom="Arme de base";
-		m_description="Arme prototype";
+	
 		m_degat=0;
 		m_poid=0;
+	}
+	
+	public static String describe()
+	{
+		return "Arme";
 	}
 	
 	public int getAtk()

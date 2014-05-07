@@ -12,10 +12,15 @@ public class Epee extends Arme
 		initVar();
 	}
 	
+	public static String describe()
+	{
+		return "Epée de base.";
+	}
+	
 	public void initVar()
 	{
 		m_nom="Epée";
-		m_description="Epée de base.";
+		
 		m_degat=5;
 		m_poid=10;
 	}

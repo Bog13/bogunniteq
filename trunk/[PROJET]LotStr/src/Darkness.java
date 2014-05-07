@@ -15,9 +15,13 @@ public class Darkness extends Arme
 	public void initVar()
 	{
 		m_nom="Darkness";
-		m_description="Epée épique ultime.";
 		m_degat=5;
 		m_poid=10;
+	}
+	
+	public static String describe()
+	{
+		return "Epée épique ultime.";
 	}
 	
 	public int getAtk()

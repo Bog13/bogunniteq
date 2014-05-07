@@ -7,7 +7,6 @@ public class Item
 {
 	protected char m_look;
 	protected Perso m_owner;
-	protected String m_description;
 	protected String m_nom;
 	protected int m_poid;
 	
@@ -29,7 +28,6 @@ public class Item
 		m_nom="item";
 		m_look=look;
 		m_owner=null;
-		m_description="aucune description";
 	}
 	
 	public int getPoid()
@@ -42,14 +40,10 @@ public class Item
 		return m_nom;
 	}
 	
-	public void setDescription(String description)
-	{
-		m_description=description;
-	}
 	
-	public String getDescription()
+	public static String describe()
 	{
-		return m_description;
+		return "";
 	}
 	
 	public void ramasser(Perso perso)

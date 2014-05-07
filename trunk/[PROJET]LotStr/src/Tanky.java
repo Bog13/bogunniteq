@@ -1,21 +1,17 @@
-import java.util.ArrayList;
-import java.util.Vector;
-
-
-public class Pnj extends Perso 
+public class Tanky extends Pnj
 {
-	public Pnj (Monde monde)
+	public Tanky (Monde monde)
 	{
 		super(monde);
-		m_vie = 18;
+		m_vie = 200;
 		m_look = 'W';
-		m_nom = "un monstre";
+		m_nom = "Tanky";
 		m_atk = 3;
 		m_def = 1;
 		
 	}
 	
-	public Pnj (Monde monde,Position2D pos)
+	public Tanky (Monde monde,Position2D pos)
 	{
 		super(monde);
 		m_position=pos;
@@ -33,11 +29,6 @@ public class Pnj extends Perso
 	{
 		//seBallader();
 		return true;
-	}
-	
-	public void loot(Item it)
-	{
-		m_monde.getCase(getPosition()).mettreItem(it);
 	}
 
 	

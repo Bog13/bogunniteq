@@ -35,16 +35,11 @@ public class LotStr
 		
 		
 		Global.FENETRE.changePanel(Ecran.MENU);
-		//if(!Global.MODE_GRAPHIQUE)Global.FENETRE.dispose();
 	
 		while(!Global.MODE_JEU && Global.MODE_GRAPHIQUE) {}//on attends le menu
 		jeu.jouer();
 		
-		/*Combat combat=new Combat(new Joueur(monde),new Pnj(monde));
 		
-		Global.FENETRE.changePanel(Ecran.COMBAT);
-		
-		combat.fight();*/
 		
 		
 		
