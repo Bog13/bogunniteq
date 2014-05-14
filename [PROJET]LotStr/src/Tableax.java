@@ -3,11 +3,11 @@ public class Tableax extends Pnj
 	public Tableax (Monde monde)
 	{
 		super(monde);
-		m_vie = 1;
+		m_vie = Global.TABLEAX_VIE;;
 		m_look = 'l';
 		m_nom = "Tableax";
-		m_atk = 50;
-		m_def = 2;
+		m_atk = Global.TABLEAX_ATK;
+		m_def = Global.TABLEAX_DEF;
 		
 	}
 	
@@ -27,7 +27,7 @@ public class Tableax extends Pnj
 	
 	public boolean jouer()
 	{
-		seBallader();
+		super.jouer();
 		return true;
 	}
 
@@ -35,6 +35,7 @@ public class Tableax extends Pnj
 	public void loot()
 	{
 		m_monde.getCase(getPosition()).mettreItem(new Darkness());
+		m_monde.placerSuperTableax();
 	}
 	
 	

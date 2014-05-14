@@ -173,5 +173,7 @@ public class Case
 	{
 		return m_position;
 	}
+
+	
 	
 }

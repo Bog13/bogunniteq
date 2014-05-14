@@ -3,11 +3,11 @@ public class Tanky extends Pnj
 	public Tanky (Monde monde)
 	{
 		super(monde);
-		m_vie = 1;
+		m_vie = Global.TANKY_VIE;
 		m_look = 'W';
 		m_nom = "Tanky";
-		m_atk = 3;
-		m_def = 1;
+		m_atk = Global.TANKY_ATK;
+		m_def = Global.TANKY_DEF;
 		
 	}
 	
@@ -27,7 +27,7 @@ public class Tanky extends Pnj
 	
 	public boolean jouer()
 	{
-		//seBallader();
+		super.jouer();
 		return true;
 	}
 

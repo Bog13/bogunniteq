@@ -118,6 +118,7 @@ public class Joueur extends Perso implements ObservableJoueur
 	public void update()
 	{
 		super.update();
+		if(m_arme!=null)m_atk=Global.ATK_JOUEUR+m_arme.getAtk();
 		updateObs();
 	}
 	

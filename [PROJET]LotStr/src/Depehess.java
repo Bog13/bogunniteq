@@ -3,11 +3,11 @@ public class Depehess extends Pnj
 	public Depehess (Monde monde)
 	{
 		super(monde);
-		m_vie = 1;
+		m_vie = Global.DEPEHESS_VIE;
 		m_look = 'h';
 		m_nom = "Depehess";
-		m_atk = 20;
-		m_def = 2;
+		m_atk = Global.DEPEHESS_ATK;;
+		m_def = Global.DEPEHESS_DEF;;
 		
 	}
 	
@@ -27,7 +27,7 @@ public class Depehess extends Pnj
 	
 	public boolean jouer()
 	{
-		//seBallader();
+		super.jouer();
 		return true;
 	}
 

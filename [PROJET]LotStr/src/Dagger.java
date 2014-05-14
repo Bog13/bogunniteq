@@ -15,8 +15,8 @@ public class Dagger extends Arme
 	public void initVar()
 	{
 		m_nom="Dague";
-		m_degat=5;
-		m_poid=10;
+		m_degat=Global.DAGGER_DEGAT;
+		m_poid=Global.DAGGER_POIDS;;
 	}
 	
 	public static String describe()

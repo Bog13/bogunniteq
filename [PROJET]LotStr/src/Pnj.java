@@ -23,15 +23,33 @@ public class Pnj extends Perso
 	
 	public void seBallader()
 	{
-		int x=Outil.hasard(-2,2);
-		int y=Outil.hasard(-2,2);
-	
-		move(x,y);
+		int hsd=Outil.hasard(0,4);
+		
+		switch(hsd)
+		{
+			case 0:move(-1,0);
+				break;
+				
+			case 1:move(1,0);
+			break;
+			
+			case 2:move(0,-1);
+			break;
+			
+			case 3:move(0,1);
+			break;
+		}
+		
+		
 	}
+	
 	
 	public boolean jouer()
 	{
+		
 		//seBallader();
+		
+
 		return true;
 	}
 	

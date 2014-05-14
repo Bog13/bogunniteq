@@ -140,6 +140,60 @@ public class Outil
 	{
 		System.out.println("[DEBUG] "+msg+" !");
 	}
+
+	public static Image getPersoFace(int m_vie)
+	{
+		Image persoFace;
+		
+		if(m_vie==0)
+		{
+			persoFace=Outil.loadImage("persoFaceDead.png");
+		}
+		else if(m_vie>=0 && m_vie<(int)(0.25*Global.VIE_JOUEUR))
+		{
+			persoFace=Outil.loadImage("persoFace3.png");
+		}
+		else if(m_vie>=(int)(0.25*Global.VIE_JOUEUR) && m_vie<(int)(0.5*Global.VIE_JOUEUR))
+		{
+			persoFace=Outil.loadImage("persoFace2.png");
+		}
+		else if(m_vie>=(int)(0.5*Global.VIE_JOUEUR) && m_vie<(int)(0.75*Global.VIE_JOUEUR))
+		{
+			persoFace=Outil.loadImage("persoFace1.png");
+		}
+		else if(m_vie>=(int)(0.75*Global.VIE_JOUEUR))
+		{
+			persoFace=Outil.loadImage("persoFace.png");
+		}
+		else persoFace=Outil.loadImage("black.png");
+		
+		return persoFace;
+	}
+	
+	public static Image getMonstreFace(String nom)
+	{
+		Image monstreFace;
+		
+		if(nom.equals("Depehess"))
+		{
+			monstreFace=Outil.loadImage("depehess_max.png");
+		}
+		else if(nom.equals("Tanky"))
+		{
+			monstreFace=Outil.loadImage("tanky_max.png");
+		}
+		else if(nom.equals("Tableax"))
+		{
+			monstreFace=Outil.loadImage("tableax_max.png");
+		}
+		else if(nom.equals("Super Tableax"))
+		{
+			monstreFace=Outil.loadImage("tableax_max.png");
+		}
+		else monstreFace=Outil.loadImage("black.png");
+		
+		return monstreFace;
+	}
 	
 	
 }
