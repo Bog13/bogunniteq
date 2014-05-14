@@ -13,10 +13,12 @@ public abstract class Potion extends Item
 		initVar();
 	}
 	
+	public int getPuissance() {return m_puissance;}
+	
 	public void initVar()
 	{
 		m_puissance=2;
-		m_poid=Global.POTION_POID;
+		m_poid=Global.POTION_POIDS;
 	}
 	
 	public static String describe()

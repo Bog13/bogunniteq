@@ -77,19 +77,20 @@ public class Monde implements ObservableMonde
 		{
 			position=Position2D.random();
 		}
-		while(getCase(position).getId() != '0' || !estDansMonde(position));
+		while(getCase(position).getId() != '0' || !estDansMonde(position) || m_joueur.getPosition().equals(position));
 		
 		return position;
 	}
 	
 	
 	
-	public void placerAnneau()
+	public void placerAnneau(Position2D pos)
 	{
-		Position2D posLibre=positionLibre();
+		Position2D posLibre=pos;
 		int i=posLibre.getL();
 		int j=posLibre.getC();
-		m_monde[i][j]=new Anneau('A');
+		Activable anneau=new Anneau('A');
+		m_monde[i][j]=anneau;
 	}
 	
 	public void placerPotionVie(int nb)
@@ -166,10 +167,10 @@ public class Monde implements ObservableMonde
 	
 	public void placerArme()
 	{
-		placerEpee(4);
-		placerSabre(4);
-		placerDarkness(4);
-		placerDagger(4);
+		placerEpee(Global.NB_EPEE);
+		placerSabre(Global.NB_SABRE);
+		placerDarkness(Global.NB_DARKNESS);
+		placerDagger(Global.NB_DAGGER);
 	}
 	
 	public void placerPotion()
@@ -186,7 +187,6 @@ public class Monde implements ObservableMonde
 		placerPotion();
 		placerPiece(Global.NB_PIECE);
 		
-		placerAnneau();
 	}
 	
 
@@ -210,6 +210,16 @@ public class Monde implements ObservableMonde
 		}
 	}
 	
+	public void placerSuperTableax()
+	{
+		for(int i=1;i<=Global.NB_TABLEAX;i++)
+		{
+			Pnj tableax=new SuperTableax(this);
+			tableax.setPosition( positionLibre() );
+			m_population.add(tableax);
+		}
+	}
+	
 	public void placerTableax()
 	{
 		for(int i=1;i<=Global.NB_TABLEAX;i++)
@@ -220,11 +230,18 @@ public class Monde implements ObservableMonde
 		}
 	}
 	
+	public void placerVendeur()
+	{
+		
+		
+	}
+	
 	public void placerPnj()
 	{
 		placerTableax();
 		placerTanky();
 		placerDepehess();
+		
 	}
 	
 	public Position2D posHasard()
@@ -245,6 +262,7 @@ public class Monde implements ObservableMonde
 		m_monde[2][2]=new Vendeur('w');
 		initMur();
 		placerItem();
+	
 		initPosition();
 		
 		placerPnj();
@@ -351,10 +369,14 @@ public class Monde implements ObservableMonde
 		}
 		
 	}
-
+	
+	
 	public void initPosition()
 	{
 		Position2D parcours=null;
+		m_positionLumineux=new Vector<Position2D>();
+		m_positionActivable=new Vector<Position2D>();
+		
 		for ( int i = 0; i < Global.NB_CASE_HAUTEUR; i++ )
 		{
 			for ( int j = 0; j < Global.NB_CASE_LARGEUR; j++ )
@@ -752,6 +774,31 @@ public class Monde implements ObservableMonde
 			}
 		}
 	}
+	
+	public boolean existeJoueurAutour( Position2D pos, int rayon )
+	{
+		Position2D parcours;
+		boolean existe=false;
+		
+		for ( int i = pos.getL() - rayon; i < pos.getL() + rayon + 1; i++ )
+		{
+			for ( int j = pos.getC() - rayon; j < pos.getC() + rayon + 1; j++ )
+			{
+				parcours = new Position2D(i, j);
+				
+				if ( this.estDansMonde(parcours) 
+					&& pos.getDistanceTo(parcours) < rayon
+				)
+				{
+					if(m_joueur.getPosition().equals(parcours))existe=true;;
+				}
+				
+	
+			}
+		}
+	
+		return existe;
+	}
 
 	
 	
@@ -796,6 +843,9 @@ public class Monde implements ObservableMonde
 						break;
 						
 					case 'A':
+						if ( getPersoPosition(pos)==m_joueur ) {Global.ringFound=true;;}
+						break;
+					case 'b':
 						if ( getPersoPosition(pos)==m_joueur ) {((Activable) this.getCase(pos)).activer();}
 						break;
 						
@@ -840,6 +890,7 @@ public class Monde implements ObservableMonde
 		for ( int i = 0; i < m_positionActivable.size(); i++ )
 		{
 			((Activable) this.getCase(m_positionActivable.get(i))).update();
+
 		}
 	}
 
@@ -849,7 +900,7 @@ public class Monde implements ObservableMonde
 		{
 			for ( int j = 0; j < Global.NB_CASE_LARGEUR; j++ )
 			{
-				this.getCase(new Position2D(i, j)).setVisible(true);//DEBUG_VISIBLE
+				this.getCase(new Position2D(i, j)).setVisible(false);//DEBUG_VISIBLE
 				
 			}
 		}

@@ -102,7 +102,6 @@ public class Jeu
 		{
 			m_alive=false;
 			win();
-			
 		}
 	}
 	

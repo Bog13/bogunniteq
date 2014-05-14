@@ -7,10 +7,20 @@ public class Vendeur extends Activable
 		super('b');
 	}
 	
+	public Vendeur()
+	{
+		super('b');
+	}
+	
 	public void activer(int timer)
 	{
 		super.activer(timer);
 		Ecran.PASSER_MODE_ACHAT();
+	}
+	
+	public void activer()
+	{
+		activer(3);
 	}
 	
 	

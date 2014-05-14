@@ -15,8 +15,8 @@ public class Sabre extends Arme
 	public void initVar()
 	{
 		m_nom="Sabre";
-		m_degat=5;
-		m_poid=10;
+		m_degat=Global.SABRE_DEGAT;
+		m_poid=Global.SABRE_POIDS;;
 	}
 	
 	public static String describe()

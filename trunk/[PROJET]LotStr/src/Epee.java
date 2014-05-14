@@ -21,8 +21,8 @@ public class Epee extends Arme
 	{
 		m_nom="Epée";
 		
-		m_degat=5;
-		m_poid=10;
+		m_degat=Global.EPEE_DEGAT;
+		m_poid=Global.EPEE_POIDS;;
 	}
 	
 	public int getAtk()

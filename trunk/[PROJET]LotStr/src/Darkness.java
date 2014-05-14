@@ -15,8 +15,8 @@ public class Darkness extends Arme
 	public void initVar()
 	{
 		m_nom="Darkness";
-		m_degat=5;
-		m_poid=10;
+		m_degat=Global.DARKNESS_DEGAT;
+		m_poid=Global.DARKNESS_POIDS;
 	}
 	
 	public static String describe()

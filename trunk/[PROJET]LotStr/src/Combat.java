@@ -18,7 +18,7 @@ public class Combat implements ObservableCombat
 		al_obs= new ArrayList<ObservateurCombat>();
 		this.addObs((ObservateurCombat) Ecran.COMBAT);
 		Global.MODE_COMBAT=true;
-		m_message=("Un combat commence ! "+agresseur.getNom()+" attaque "+victime.getNom());
+		message("Un combat commence ! "+agresseur.getNom()+" attaque "+victime.getNom());
 		
 		
 		m_continuer = true;
@@ -66,20 +66,24 @@ public class Combat implements ObservableCombat
 			}
 			
 			update();
-			attaquer(m_victime, m_agresseur);
+			
+			if(m_victime.estVivant())attaquer(m_victime, m_agresseur);
 		
-			pause();
+			//pause();
 		}
 		
 		if(m_gagnant != null)m_message="Victoire de "+m_gagnant.getNom()+" !";
-		else m_message="Pas de gagnant...";
+		else message("Pas de gagnant...");
 		
 		if(m_gagnant != null && m_gagnant==Global.MONDE.getJoueur())
 		{
-			Outil.debugMsg("1");
 			Item loot=Outil.hasardItem();
 			if(m_gagnant==m_agresseur)((Pnj) m_victime).loot();
 			else ((Pnj) m_agresseur).loot();
+		}
+		else if(m_gagnant != null && m_gagnant!=Global.MONDE.getJoueur())
+		{
+			//Ecran.PASSER_MODE_MENU();
 		}
 		
 		update();
@@ -125,24 +129,31 @@ public class Combat implements ObservableCombat
 			
 			if(agresseur.hasArme())
 			{
-				m_message=agresseur.getNom()+" attaque "+victime.getNom()+" avec " + agresseur.getArme().getNom()+" !";
-				victime.takeDamage( agresseur.getAtk()+agresseur.getArme().getAtk() - victime.getDef() );
+				message(agresseur.getNom()+" attaque "+victime.getNom()+" avec " + agresseur.getArme().getNom()+" !");
+				victime.takeDamage( agresseur.getAtk() - victime.getDef() );
 			}
 			
 			else
 			{
-				m_message=agresseur.getNom()+" attaque "+victime.getNom()+" !";
+				message(agresseur.getNom()+" attaque "+victime.getNom()+" !");
 				victime.takeDamage( agresseur.getAtk() - victime.getDef() );
 			}
 		}
 		else 
 		{
-			victime.takeDamage(1);
+			agresseur.takeDamage(1);
+			message(agresseur.getNom()+" se blesse sur la défense de "+victime.getNom());
 		}
 		
 		if(agresseur.estMort())m_gagnant=victime;
 		else if(victime.estMort())m_gagnant=agresseur;
 		
+	}
+	
+	public void message(String msg)
+	{
+		m_message=msg;
+		pause();
 	}
 
 	public void fuir() 
